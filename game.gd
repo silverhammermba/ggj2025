@@ -1,6 +1,6 @@
 class_name Game extends Node3D
 
-@onready var gridMap: GridMap = $map
+@onready var gridMap: Map = $map
 @onready var camera: Camera3D = $"camera pivot/Camera3D"
 
 @export var RAY_CAST_LENGTH := 1000
@@ -16,10 +16,10 @@ var rayEnd := Vector3.ZERO
 func _ready() -> void:
 	var chars = get_tree().get_nodes_in_group("character")
 	
-	for ch in chars:
-		assert(ch is Character)
+	for node in chars:
+		var ch: Character = node
 		characters.append(ch)
-		ch.move(gridMap.local_to_map(gridMap.to_local((ch as Node3D).position)),gridMap)
+		ch.move(gridMap.global_to_map(ch.position), gridMap)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -65,24 +65,20 @@ func _physics_process(_delta: float) -> void:
 		var result := space_state.intersect_ray(query)
 		
 		if "position" in result:
-			var clickedPosition := result["position"] as Vector3
-			var clickedNormal := result["normal"] as Vector3
-			print_debug("clicked on: ", clickedPosition)
-			var clickedGridPosition = gridMap.local_to_map(gridMap.to_local(clickedPosition + ((clickedNormal + Vector3.UP) * 0.1)))
-			print_debug("grid position: ", clickedGridPosition)
-			var bubble = bubbleScene.instantiate()
+			var clickedPosition: Vector3 = result["position"]
+			var clickedNormal: Vector3 = result["normal"]
+			var clickedGridPosition := gridMap.global_to_map(clickedPosition + clickedNormal * 0.1)
+			var bubble: Bubble = bubbleScene.instantiate()
 			add_child(bubble)
-			var convertedPosition = gridMap.to_global(gridMap.map_to_local(clickedGridPosition))
-			(bubble as Node3D).global_position = convertedPosition
-			print_debug("bubble made at: ", bubble.global_position)
-			
+			bubble.set_spawn(clickedGridPosition, gridMap)
 		
 		newRayCast = false
 
-func _input(event):
-	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
-		var from := camera.project_ray_origin(event.position)
-		var normal := camera.project_ray_normal(event.position)
+func _input(event: InputEvent) -> void:
+	var click := event as InputEventMouseButton
+	if click and click.pressed and click.button_index == 1:
+		var from := camera.project_ray_origin(click.position)
+		var normal := camera.project_ray_normal(click.position)
 		rayOrigin = from
 		rayEnd = from + normal * RAY_CAST_LENGTH
 		newRayCast = true

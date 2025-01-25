@@ -9,26 +9,28 @@ func deselect() -> void:
 func select() -> void:
 	animation.play("bob")
 
-func move(moveCoords: Vector3i, grid: GridMap) -> void:
-	#collision with ramp moves you up
-	if(grid.get_cell_item(moveCoords)  == 1):
-		moveCoords += Vector3i.UP
+func move(moveCoords: Vector3i, grid: Map) -> void:
+	var obstacle := grid.get_cell_item(moveCoords)
 	
-	#collision with block stops movement
-	if(grid.get_cell_item(moveCoords)  == 0):
-		return
+	match obstacle:
+		-1: # no collision
+			pass
+		0: # collision with block stops movement
+			return
+		1: # collision with ramp moves you up
+			moveCoords += Vector3i.UP
+		_: # collision with something we don't know how to handle
+			assert(obstacle == -1)
 		
-	#if current grid cell is empty (you are in the air) fall until you hit a floor
+	# fall until you hit a floor
 	for n in range(0,10):
-		if(grid.get_cell_item(moveCoords) != -1):
+		moveCoords += Vector3i.DOWN
+		if grid.get_cell_item(moveCoords) != -1:
 			moveCoords += Vector3i.UP
 			break
 		elif (n == 9):
 			queue_free()
-		moveCoords += Vector3i.DOWN
 		
-	gridPos = moveCoords + Vector3i.UP
-	var newPos := grid.map_to_local(gridPos)
-	print_debug("character pos: ", newPos)
-	global_position = grid.to_global(newPos)
+	gridPos = moveCoords
+	global_position = grid.map_to_global(gridPos)
 	

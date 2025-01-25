@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bg3jpfe55aita"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_demmu"]
-[ext_resource type="PackedScene" uid="uid://c2q80frax58ss" path="res://bubble.tscn" id="2_4fehy"]
+[ext_resource type="PackedScene" uid="uid://q7t0uad308xi" path="res://bubble.tscn" id="2_4fehy"]
 [ext_resource type="PackedScene" uid="uid://drqg77fxlwpfe" path="res://map.tscn" id="2_hw383"]
 [ext_resource type="PackedScene" uid="uid://c5dgohn5rphyu" path="res://sphere.tscn" id="2_vkvgg"]
 [ext_resource type="PackedScene" uid="uid://dgc7cu5viowl" path="res://character.tscn" id="3_jd6sq"]
@@ -32,3 +32,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.50185, 1.53101, 3.47875)
 
 [node name="Character2" parent="." instance=ExtResource("3_jd6sq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.50185, 1.5416, 5.85857)
+
+[node name="Character3" parent="." instance=ExtResource("3_jd6sq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.60702, 2.01158, 2.47807)
