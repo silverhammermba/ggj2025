@@ -21,7 +21,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.502872, 0.586763, 0.5)]
+"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_g7wc8"]
@@ -34,10 +34,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.566667),
+"times": PackedFloat32Array(0, 0.3, 0.633333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0.502872, 0.586763, 0.5), Vector3(0.480738, 0.700801, 0.5), Vector3(0.466372, 0.366251, 0.5)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0.300125, 0), Vector3(0, -0.0369328, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f0etq"]
@@ -50,12 +50,12 @@ _data = {
 script = ExtResource("1_kes5e")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.502872, 0.586763, 0.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 shape = SubResource("SphereShape3D_lnxdv")
 
 [node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 texture = SubResource("GradientTexture2D_qepe6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D"]
