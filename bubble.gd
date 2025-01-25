@@ -14,6 +14,6 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	print_debug("BUBBLED: ", body.name)
 	var victim = body.get_parent()
 	victim.bubbleVictim = true
-	add_child(victim)
+	victim.reparent(self)
 	victim.animation.stop()
 	animation.play("bob")
