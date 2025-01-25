@@ -7,6 +7,7 @@ class_name Game extends Node3D
 @export var bubbleScene : PackedScene
 
 var characters: Array[Character] = []
+var bubbles: Array[Bubble] = []
 var selection := -1
 var newRayCast := false
 var rayOrigin := Vector3.ZERO
@@ -46,33 +47,41 @@ func _process(_delta: float) -> void:
 			characters[selection].select()
 	if selection >= 0:
 		if Input.is_action_just_pressed("move_down"):
-			var  currentCharacter := characters[selection]
+			var currentCharacter := characters[selection]
 			currentCharacter.move(currentCharacter.gridPos + Vector3i.BACK, gridMap)
 		if Input.is_action_just_pressed("move_up"):
-			var  currentCharacter := characters[selection]
+			var currentCharacter := characters[selection]
 			currentCharacter.move(currentCharacter.gridPos + Vector3i.FORWARD, gridMap)
 		if Input.is_action_just_pressed("move_left"):
-			var  currentCharacter := characters[selection]
+			var currentCharacter := characters[selection]
 			currentCharacter.move(currentCharacter.gridPos + Vector3i.LEFT, gridMap)
 		if Input.is_action_just_pressed("move_right"):
-			var  currentCharacter := characters[selection]
+			var currentCharacter := characters[selection]
 			currentCharacter.move(currentCharacter.gridPos + Vector3i.RIGHT, gridMap)
-			
+
 func _physics_process(_delta: float) -> void:
 	if newRayCast:
 		var space_state := get_world_3d().direct_space_state
-		var query := PhysicsRayQueryParameters3D.create(rayOrigin, rayEnd)
+		# look only for collisions with ground for spawning bubbles
+		var query := PhysicsRayQueryParameters3D.create(rayOrigin, rayEnd, 1)
 		var result := space_state.intersect_ray(query)
 		
 		if "position" in result:
 			var clickedPosition: Vector3 = result["position"]
 			var clickedNormal: Vector3 = result["normal"]
-			var clickedGridPosition := gridMap.global_to_map(clickedPosition + clickedNormal * 0.1)
-			var bubble: Bubble = bubbleScene.instantiate()
-			add_child(bubble)
-			bubble.set_spawn(clickedGridPosition, gridMap)
+			var clickedGridPosition := gridMap.global_to_open(clickedPosition + clickedNormal * 0.1)
+			spawn_bubble(clickedGridPosition)
 		
 		newRayCast = false
+
+func spawn_bubble(pos: Vector3i) -> void:
+	for ch in characters:
+		if ch.gridPos == pos:
+			# can't spawn a bubble directly on someone
+			return
+	var bubble: Bubble = bubbleScene.instantiate()
+	add_child(bubble)
+	bubble.set_spawn(pos, gridMap)
 
 func _input(event: InputEvent) -> void:
 	var click := event as InputEventMouseButton
