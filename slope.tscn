@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpf675sxdx0im"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cebpt"]
+points = PackedVector3Array(0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_2yoqh"]
+left_to_right = 1.0
+
+[node name="Slope" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_cebpt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0.5, 0.5, 0.5)
+mesh = SubResource("PrismMesh_2yoqh")
+skeleton = NodePath("../CollisionShape3D")
