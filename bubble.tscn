@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2q80frax58ss"]
+
+[ext_resource type="Script" path="res://bubble.gd" id="1_ifuwr"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_1iobu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t1kqy"]
+albedo_color = Color(0.101961, 0.933333, 0.980392, 0.658824)
+
+[node name="Bubble" type="Node3D"]
+script = ExtResource("1_ifuwr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_1iobu")
+surface_material_override/0 = SubResource("StandardMaterial3D_t1kqy")

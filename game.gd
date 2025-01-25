@@ -4,6 +4,7 @@ class_name Game extends Node3D
 @onready var camera: Camera3D = $"camera pivot/Camera3D"
 
 @export var RAY_CAST_LENGTH := 1000
+@export var bubbleScene : PackedScene
 
 var characters: Array[Character] = []
 var selection := -1
@@ -64,8 +65,17 @@ func _physics_process(_delta: float) -> void:
 		var result := space_state.intersect_ray(query)
 		
 		if "position" in result:
-			var position := result["position"] as Vector3
-			print_debug("clicked on: ", position)
+			var clickedPosition := result["position"] as Vector3
+			var clickedNormal := result["normal"] as Vector3
+			print_debug("clicked on: ", clickedPosition)
+			var clickedGridPosition = gridMap.local_to_map(gridMap.to_local(clickedPosition + ((clickedNormal + Vector3.UP) * 0.1)))
+			print_debug("grid position: ", clickedGridPosition)
+			var bubble = bubbleScene.instantiate()
+			add_child(bubble)
+			var convertedPosition = gridMap.to_global(gridMap.map_to_local(clickedGridPosition))
+			(bubble as Node3D).global_position = convertedPosition
+			print_debug("bubble made at: ", bubble.global_position)
+			
 		
 		newRayCast = false
 

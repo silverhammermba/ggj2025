@@ -1,18 +1,13 @@
-class_name Character extends Node3D
-
-@onready var animation: AnimationPlayer = $CharacterBody3D/AnimationPlayer
+extends Node3D
 var gridPos: Vector3i = Vector3.ZERO
 
-func deselect() -> void:
-	animation.stop()
-
-func select() -> void:
-	animation.play("bob")
+func _ready() -> void:
+	print_debug("I'M HERE")
 
 func move(moveCoords: Vector3i, grid: GridMap) -> void:
 	#collision with ramp moves you up
-	if(grid.get_cell_item(moveCoords)  == 1):
-		moveCoords += Vector3i.UP
+	#if(grid.get_cell_item(moveCoords)  == 1):
+		#moveCoords += Vector3i.UP
 	
 	#collision with block stops movement
 	if(grid.get_cell_item(moveCoords)  == 0):
@@ -27,8 +22,6 @@ func move(moveCoords: Vector3i, grid: GridMap) -> void:
 			queue_free()
 		moveCoords += Vector3i.DOWN
 		
-	gridPos = moveCoords + Vector3i.UP
+	gridPos = moveCoords
 	var newPos := grid.map_to_local(gridPos)
-	print_debug("character pos: ", newPos)
 	global_position = grid.to_global(newPos)
-	
