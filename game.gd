@@ -1,13 +1,15 @@
 class_name Game extends Node3D
 
 @onready var gridMap: GridMap = $map
-@onready var rayCast: RayCast3D = $rayCaster
 @onready var camera: Camera3D = $"camera pivot/Camera3D"
 
 @export var RAY_CAST_LENGTH := 1000
 
 var characters: Array[Character] = []
 var selection := -1
+var newRayCast := false
+var rayOrigin := Vector3.ZERO
+var rayEnd := Vector3.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -56,17 +58,21 @@ func _process(_delta: float) -> void:
 			currentCharacter.move(currentCharacter.gridPos + Vector3i.RIGHT, gridMap)
 			
 func _physics_process(_delta: float) -> void:
-	var collision := rayCast.get_collider()
-	if collision == null:
-		return
-	# TODO: this is not disabling further raycasts for some reason
-	rayCast.enabled = false
-	if (collision as Node).is_in_group("ground"):
-		print_debug(collision)
+	if newRayCast:
+		var space_state := get_world_3d().direct_space_state
+		var query := PhysicsRayQueryParameters3D.create(rayOrigin, rayEnd)
+		var result := space_state.intersect_ray(query)
+		
+		if "position" in result:
+			var position := result["position"] as Vector3
+			print_debug("clicked on: ", position)
+		
+		newRayCast = false
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
-		var from = camera.project_ray_origin(event.position)
-		rayCast.enabled = true
-		rayCast.position = from
-		rayCast.target_position = camera.project_ray_normal(event.position) * RAY_CAST_LENGTH
+		var from := camera.project_ray_origin(event.position)
+		var normal := camera.project_ray_normal(event.position)
+		rayOrigin = from
+		rayEnd = from + normal * RAY_CAST_LENGTH
+		newRayCast = true
