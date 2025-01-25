@@ -12,6 +12,7 @@ var selection := -1
 var newRayCast := false
 var rayOrigin := Vector3.ZERO
 var rayEnd := Vector3.ZERO
+var currentTeam := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,25 +21,48 @@ func _ready() -> void:
 	for node in chars:
 		var ch: Character = node
 		characters.append(ch)
+		# give each character a free "move" to snap to the grid
+		ch.moves = 1
 		ch.move(gridMap.global_to_map(ch.position), gridMap)
+		ch.new_turn(currentTeam)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	var prev_selection := selection
 	
-	if Input.is_action_just_pressed("next char"):
-		selection += 1
-		if characters.size() > 0:
-			selection = selection % characters.size()
-		else:
-			selection = -1
+	var has_actions := false
+	for ch in characters:
+		if ch.has_actions(currentTeam):
+			has_actions = true
+			break
+	if !has_actions or Input.is_action_just_pressed("end_turn"):
+		new_turn()
+		# check again if new team has actions
+		has_actions = false
+		for ch in characters:
+			if ch.has_actions(currentTeam):
+				has_actions = true
+				break
+	
+	if !has_actions:
+		# TODO: game over? this side has no playable characters
+		return
+	
 	if Input.is_action_just_pressed("prev char"):
-		if selection >= 0:
-			selection -= 1
-			if selection < 0:
+		while true:
+			if selection >= 0:
+				selection -= 1
+				if selection < 0:
+					selection = characters.size() - 1
+			else:
 				selection = characters.size() - 1
-		else:
-			selection = characters.size() - 1
+			if characters[selection].has_actions(currentTeam):
+				break
+	elif Input.is_action_just_pressed("next char") or (selection >= 0 and characters[selection].team != currentTeam):
+		while true:
+			selection = (selection + 1) % characters.size()
+			if characters[selection].has_actions(currentTeam):
+				break
 		
 	if selection != prev_selection:
 		if prev_selection >= 0:
@@ -80,8 +104,14 @@ func spawn_bubble(pos: Vector3i) -> void:
 			# can't spawn a bubble directly on someone
 			return
 	var bubble: Bubble = bubbleScene.instantiate()
+	bubbles.append(bubble)
 	add_child(bubble)
 	bubble.set_spawn(pos, gridMap)
+	
+func new_turn() -> void:
+	currentTeam = 1 - currentTeam
+	for ch in characters:
+		ch.new_turn(currentTeam)
 
 func _input(event: InputEvent) -> void:
 	var click := event as InputEventMouseButton
