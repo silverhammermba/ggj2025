@@ -1,4 +1,4 @@
-extends Node3D
+class_name Game extends Node3D
 
 var characters: Array[Character] = []
 var selection := -1
