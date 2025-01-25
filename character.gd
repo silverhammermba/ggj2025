@@ -2,6 +2,7 @@ class_name Character extends Node3D
 
 @onready var animation: AnimationPlayer = $CharacterBody3D/AnimationPlayer
 var gridPos: Vector3i = Vector3.ZERO
+var bubbleVictim = false;
 
 func deselect() -> void:
 	animation.stop()
@@ -31,7 +32,8 @@ func move(moveCoords: Vector3i, grid: Map) -> void:
 			break
 		elif n == 9:
 			queue_free()
-		
-	gridPos = moveCoords
-	global_position = grid.map_to_global(gridPos)
+	
+	if(!bubbleVictim):
+		gridPos = moveCoords
+		global_position = grid.map_to_global(gridPos)
 	
