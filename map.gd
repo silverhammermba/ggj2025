@@ -20,6 +20,8 @@ func _process(_delta: float) -> void:
 		selection += 1
 		if characters.size() > 0:
 			selection = selection % characters.size()
+		else:
+			selection = -1
 	if Input.is_action_just_pressed("prev char"):
 		if selection >= 0:
 			selection -= 1
@@ -29,7 +31,7 @@ func _process(_delta: float) -> void:
 			selection = characters.size() - 1
 		
 	if selection != prev_selection:
-		if prev_selection > 0:
+		if prev_selection >= 0:
 			characters[prev_selection].deselect()
 		if selection >= 0:
 			characters[selection].select()
