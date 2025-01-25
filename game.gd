@@ -1,8 +1,10 @@
 class_name Game extends Node3D
 
 @onready var gridMap: GridMap = $map
-@onready var rayCast: RayCast3d = $rayCaster
+@onready var rayCast: RayCast3D = $rayCaster
 @onready var camera: Camera3D = $"camera pivot/Camera3D"
+
+@export var RAY_CAST_LENGTH := 1000
 
 var characters: Array[Character] = []
 var selection := -1
@@ -52,12 +54,19 @@ func _process(_delta: float) -> void:
 		if Input.is_action_just_pressed("move_right"):
 			var  currentCharacter := characters[selection]
 			currentCharacter.move(currentCharacter.gridPos + Vector3i.RIGHT, gridMap)
-		
 			
 func _physics_process(_delta: float) -> void:
-	pass
+	var collision := rayCast.get_collider()
+	if collision == null:
+		return
+	# TODO: this is not disabling further raycasts for some reason
+	rayCast.enabled = false
+	if (collision as Node).is_in_group("ground"):
+		print_debug(collision)
 
 func _input(event):
-	if event is Input.is_action_just_pressed("bubble"):
-		var from = camera.project_ray_origin()
-			#rayCast.
+	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
+		var from = camera.project_ray_origin(event.position)
+		rayCast.enabled = true
+		rayCast.position = from
+		rayCast.target_position = camera.project_ray_normal(event.position) * RAY_CAST_LENGTH

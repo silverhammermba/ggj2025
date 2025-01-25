@@ -3,7 +3,7 @@
 [ext_resource type="MeshLibrary" uid="uid://cbh5jxjtilcpt" path="res://new_mesh_library.tres" id="1_xhmrc"]
 [ext_resource type="Script" path="res://map.gd" id="2_ndia7"]
 
-[node name="map" type="GridMap"]
+[node name="map" type="GridMap" groups=["ground"]]
 mesh_library = ExtResource("1_xhmrc")
 cell_size = Vector3(1, 0.5, 1)
 data = {
