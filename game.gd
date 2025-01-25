@@ -55,18 +55,26 @@ func _process(_delta: float) -> void:
 			var  currentCharacter := characters[selection]
 			currentCharacter.move(currentCharacter.gridPos + Vector3i.RIGHT, gridMap)
 			
-func _physics_process(_delta: float) -> void:
-	var collision := rayCast.get_collider()
-	if collision == null:
-		return
-	# TODO: this is not disabling further raycasts for some reason
-	rayCast.enabled = false
-	if (collision as Node).is_in_group("ground"):
-		print_debug(collision)
+#func _physics_process(_delta: float) -> void:
+	#var collision := rayCast.get_collider()
+	#if collision == null:
+		#return
+	## TODO: this is not disabling further raycasts for some reason
+	#rayCast.enabled = false
+	#if (collision as Node).is_in_group("ground"):
+		#print_debug(collision)
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
 		var from = camera.project_ray_origin(event.position)
+		#print_debug("from: ", from)
 		rayCast.enabled = true
 		rayCast.position = from
-		rayCast.target_position = camera.project_ray_normal(event.position) * RAY_CAST_LENGTH
+		var to = from + camera.project_ray_normal(event.position) * RAY_CAST_LENGTH
+		rayCast.target_position = to
+		#print_debug("to: " , to)
+		var collision := rayCast.get_collider()
+		if collision == null:
+			return
+		if (collision as Node).is_in_group("ground"):
+			print_debug(collision)
