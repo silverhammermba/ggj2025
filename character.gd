@@ -26,9 +26,10 @@ func move(moveCoords: Vector3i, grid: Map) -> void:
 	for n in range(0,10):
 		moveCoords += Vector3i.DOWN
 		if grid.get_cell_item(moveCoords) != -1:
+			# found floor, move back up
 			moveCoords += Vector3i.UP
 			break
-		elif (n == 9):
+		elif n == 9:
 			queue_free()
 		
 	gridPos = moveCoords
