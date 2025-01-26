@@ -10,8 +10,8 @@ var bubbleVictim = false
 @export var classPusher := false
 
 @export var team := 0
-@export var max_actions := 100
-@export var max_moves := 300
+@export var max_actions := 1
+@export var max_moves := 3
 var actions := 0
 var moves := 0
 
@@ -35,12 +35,21 @@ func new_turn(currentTeam: int) -> void:
 		return
 	actions = max_actions
 	moves = max_moves
-	
+
 func has_actions(currentTeam: int) -> bool:
 	if team != currentTeam:
 		return false
 	return actions > 0 or moves > 0
-	
+
+func status() -> String:
+	var klass := "Blower"
+	if classPopper:
+		klass = "Popper"
+	elif classPusher:
+		klass = "Pusher"
+	var charState := "BUBBLED!" if bubbleVictim else "%d move, %d action" % [moves, actions]
+	return "%s: %s" % [klass, charState]
+
 func grid_dist(pos: Vector3i) -> int:
 	return absi(pos.x - gridPos.x) + absi(pos.y - gridPos.y) + absi(pos.z - gridPos.z)
 

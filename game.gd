@@ -161,9 +161,8 @@ func update_ui() -> void:
 		var ch := characters[idx]
 		if ch.team != currentTeam:
 			continue
-		var presel = "> " if idx == selection else ""
-		var postsel = " <" if idx == selection else ""
-		var klass := "Blower" if ch.classBlower else "Popper" if ch.classPopper else "Pusher"
-		ui += "\n%s%s: %d move, %d action%s" % [presel, klass, ch.moves, ch.actions, postsel]
+		var presel := ("> " if idx == selection else "")
+		var postsel := (" <" if idx == selection else "")
+		ui += "\n%s%s%s" % [presel, ch.status(), postsel]
 	uiLabel.text = ui
 		
