@@ -108,19 +108,20 @@ func _physics_process(_delta: float) -> void:
 			var clickedPosition: Vector3 = result["position"]
 			var clickedNormal: Vector3 = result["normal"]
 			
-			if currentCharacter.classBlower:
-				var clickedGridPosition := gridMap.global_to_open(clickedPosition + clickedNormal * 0.1)
-				if currentCharacter.grid_dist(clickedGridPosition) <= bubbleRange:
-					if spawn_bubble(clickedGridPosition):
+			if(!currentCharacter.bubbleVictim):
+				if currentCharacter.classBlower:
+					var clickedGridPosition := gridMap.global_to_open(clickedPosition + clickedNormal * 0.1)
+					if currentCharacter.grid_dist(clickedGridPosition) <= bubbleRange:
+						if spawn_bubble(clickedGridPosition):
+							currentCharacter.actions -= 1
+				else:
+					var bubble := result["collider"].get_parent() as Bubble
+					if currentCharacter.classPopper and currentCharacter.grid_dist(bubble.gridPos) <= popRange:
+						bubble.pop(gridMap)
 						currentCharacter.actions -= 1
-			else:
-				var bubble := result["collider"].get_parent() as Bubble
-				if currentCharacter.classPopper and currentCharacter.grid_dist(bubble.gridPos) <= popRange:
-					bubble.pop(gridMap)
-					currentCharacter.actions -= 1
-				elif (currentCharacter.classPusher and currentCharacter.grid_dist(bubble.gridPos) <= pushRange):
-					bubble.push(currentCharacter.gridPos, gridMap)
-					currentCharacter.actions -= 1
+					elif (currentCharacter.classPusher and currentCharacter.grid_dist(bubble.gridPos) <= pushRange):
+						bubble.push(currentCharacter.gridPos, gridMap)
+						currentCharacter.actions -= 1
 
 func spawn_bubble(pos: Vector3i) -> bool:
 	for ch in characters:
@@ -161,6 +162,9 @@ func new_turn() -> void:
 				ch.setPos(gridPos, gridMap)
 				break
 				
+	for victimBubble in bubbles:
+		if(is_instance_valid(victimBubble) and victimBubble.hasVictim and victimBubble.victim.team == currentTeam):
+			victimBubble.liveSpindown(gridMap)
 
 func _input(event: InputEvent) -> void:
 	var click := event as InputEventMouseButton

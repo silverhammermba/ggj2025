@@ -1,13 +1,15 @@
 class_name Bubble extends Node3D
 var gridPos: Vector3i = Vector3.ZERO
 @onready var animation: AnimationPlayer = $AnimationPlayer
-
+@onready var label: Label3D = $Label3D
 var victim: Character
 var hasVictim = false
+@export var liveTime = 3
 
 func set_spawn(pos: Vector3i, grid: Map) -> void:
 	gridPos = pos
 	global_position = grid.map_to_global(gridPos)
+	label.text = ""
 
 func pop(grid: Map) -> void:
 	if(hasVictim):
@@ -46,3 +48,12 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	victim.bubbleVictim = true
 	victim.animation.stop()
 	animation.play("bob")
+	
+	label.text = str(liveTime)
+	
+
+func liveSpindown(grid: Map) -> void:
+	liveTime -= 1
+	label.text = str(liveTime)
+	if(liveTime <= 0):
+		pop(grid)
