@@ -1,17 +1,19 @@
-[gd_scene load_steps=12 format=3 uid="uid://dgc7cu5viowl"]
+[gd_scene load_steps=13 format=3 uid="uid://dgc7cu5viowl"]
 
 [ext_resource type="Script" path="res://character.gd" id="1_kes5e"]
+[ext_resource type="Texture2D" uid="uid://cl3ad3pek08x3" path="res://Assets/UI/Poker.png" id="2_6qn54"]
 [ext_resource type="PackedScene" uid="uid://v24so1xiv2je" path="res://generalist.tscn" id="2_ofvwj"]
-[ext_resource type="PackedScene" uid="uid://dj13m5ehxckna" path="res://blower.tscn" id="3_u4sli"]
-[ext_resource type="PackedScene" uid="uid://dmk00ydps135k" path="res://popper.tscn" id="4_yy85d"]
-[ext_resource type="PackedScene" uid="uid://bkabxp1q85qp2" path="res://pusher.tscn" id="5_1oc7x"]
+[ext_resource type="Texture2D" uid="uid://btv0q78gptd7r" path="res://Assets/UI/Pusher.png" id="3_17v3a"]
+[ext_resource type="PackedScene" path="res://blower.tscn" id="3_u4sli"]
+[ext_resource type="Texture2D" uid="uid://blv2uo580cbsu" path="res://Assets/UI/Blower.png" id="4_10pp6"]
+[ext_resource type="PackedScene" path="res://popper.tscn" id="4_yy85d"]
+[ext_resource type="PackedScene" path="res://pusher.tscn" id="5_1oc7x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dqlwy"]
 transparency = 1
 albedo_color = Color(0, 0.380392, 1, 0.313726)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rihgc"]
-render_priority = -1
 transparency = 1
 albedo_color = Color(1, 0.317647, 0.721569, 0.301961)
 
@@ -56,6 +58,9 @@ _data = {
 
 [node name="Character" type="Node3D" groups=["character"]]
 script = ExtResource("1_kes5e")
+PopperImg = ExtResource("2_6qn54")
+PusherImg = ExtResource("3_17v3a")
+BlowerImg = ExtResource("4_10pp6")
 team0Overlay = SubResource("StandardMaterial3D_dqlwy")
 team1Overlay = SubResource("StandardMaterial3D_rihgc")
 

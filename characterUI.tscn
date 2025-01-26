@@ -47,6 +47,13 @@ text = "Actions - "
 fit_content = true
 scroll_active = false
 
+[node name="PFP" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+expand_mode = 3
+
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 1
