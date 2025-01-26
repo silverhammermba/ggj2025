@@ -2,7 +2,7 @@ class_name Character extends Node3D
 
 @onready var animation: AnimationPlayer = $CharacterBody3D/AnimationPlayer
 @onready var sprite: Sprite3D = $CharacterBody3D/Sprite3D
-var gridPos: Vector3i = Vector3.ZERO
+var gridPos := Vector3i.ZERO
 var bubbleVictim = false
 
 @export var classBlower := false
@@ -10,8 +10,8 @@ var bubbleVictim = false
 @export var classPusher := false
 
 @export var team := 0
-@export var max_actions := 1
-@export var max_moves := 3
+@export var max_actions := 100
+@export var max_moves := 300
 var actions := 0
 var moves := 0
 
@@ -40,6 +40,9 @@ func has_actions(currentTeam: int) -> bool:
 	if team != currentTeam:
 		return false
 	return actions > 0 or moves > 0
+	
+func grid_dist(pos: Vector3i) -> int:
+	return absi(pos.x - gridPos.x) + absi(pos.y - gridPos.y) + absi(pos.z - gridPos.z)
 
 func move(moveCoords: Vector3i, grid: Map) -> void:
 	if moves <= 0:

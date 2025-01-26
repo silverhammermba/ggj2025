@@ -1,6 +1,12 @@
-[gd_resource type="MeshLibrary" load_steps=9 format=3 uid="uid://cbh5jxjtilcpt"]
+[gd_resource type="MeshLibrary" load_steps=11 format=3 uid="uid://cbh5jxjtilcpt"]
+
+[ext_resource type="Texture2D" uid="uid://bytjyx67ut4rp" path="res://Square_Button-512.webp" id="1_duufy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppvqf"]
+albedo_texture = ExtResource("1_duufy")
 
 [sub_resource type="BoxMesh" id="BoxMesh_h58xk"]
+material = SubResource("StandardMaterial3D_ppvqf")
 size = Vector3(1, 0.5, 1)
 
 [sub_resource type="Image" id="Image_t13jk"]
