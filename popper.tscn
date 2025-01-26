@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmk00ydps135k"]
+
+[ext_resource type="PackedScene" uid="uid://dalg5kj6d0y24" path="res://Assets/Popper.glb" id="1_k2nwy"]
+[ext_resource type="Script" path="res://character_model.gd" id="2_16wif"]
+
+[node name="Popper" instance=ExtResource("1_k2nwy")]
+script = ExtResource("2_16wif")
+
+[node name="Eyes2" parent="Armature2/Skeleton3D" index="0"]
+transform = Transform3D(1.99982, -5.58743e-09, -1.42096e-14, 5.58747e-09, 1.99982, -2.84192e-14, -1.42096e-14, -2.84192e-14, 1.99982, -2.32831e-09, -0.761596, 5.32907e-14)
+
+[node name="Head2" parent="Armature2/Skeleton3D" index="1"]
+transform = Transform3D(1.99982, -5.58743e-09, -1.42096e-14, 5.58747e-09, 1.99982, -2.84192e-14, -1.42096e-14, -2.84192e-14, 1.99982, -1.86265e-09, -1.01086, 0.334408)

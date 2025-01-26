@@ -1,6 +1,10 @@
 class_name Character extends Node3D
 
-@onready var model: CharacterModel = $CharacterBody3D/Model
+@onready var generalist: CharacterModel = $CharacterBody3D/Generalist
+@onready var blower: CharacterModel = $CharacterBody3D/Blower
+@onready var popper: CharacterModel = $CharacterBody3D/Popper
+@onready var pusher: CharacterModel = $CharacterBody3D/Pusher
+var model: CharacterModel
 var gridPos := Vector3i.ZERO
 var bubbleVictim = false
 
@@ -17,6 +21,15 @@ var moves := 0
 var timeout := 0
 
 func _ready() -> void:
+	model = generalist
+	generalist.visible = false
+	if classBlower:
+		model = blower
+	elif classPopper:
+		model = popper
+	elif classPusher:
+		model = pusher
+	model.visible = true
 	match team:
 		0:
 			pass

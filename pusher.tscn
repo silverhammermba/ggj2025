@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkabxp1q85qp2"]
+
+[ext_resource type="PackedScene" uid="uid://bvdj5fmq2am38" path="res://Assets/Pusher.glb" id="1_y8v7v"]
+[ext_resource type="Script" path="res://character_model.gd" id="2_aj5j2"]
+
+[node name="Pusher" instance=ExtResource("1_y8v7v")]
+script = ExtResource("2_aj5j2")
+
+[node name="Head3" parent="Armature3/Skeleton3D" index="0"]
+transform = Transform3D(0.847076, -2.36669e-09, -6.01884e-15, 2.36671e-09, 0.847076, -1.20377e-14, -6.01884e-15, -1.20377e-14, 0.847076, -7.45058e-09, 1.83762, 1.87933e-08)

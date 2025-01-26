@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgc7cu5viowl"]
+[gd_scene load_steps=10 format=3 uid="uid://dgc7cu5viowl"]
 
 [ext_resource type="Script" path="res://character.gd" id="1_kes5e"]
-[ext_resource type="PackedScene" uid="uid://v24so1xiv2je" path="res://character_model.tscn" id="2_ofvwj"]
+[ext_resource type="PackedScene" uid="uid://v24so1xiv2je" path="res://generalist.tscn" id="2_ofvwj"]
+[ext_resource type="PackedScene" uid="uid://dj13m5ehxckna" path="res://blower.tscn" id="3_u4sli"]
+[ext_resource type="PackedScene" uid="uid://dmk00ydps135k" path="res://popper.tscn" id="4_yy85d"]
+[ext_resource type="PackedScene" uid="uid://bkabxp1q85qp2" path="res://pusher.tscn" id="5_1oc7x"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lnxdv"]
 
@@ -49,8 +52,20 @@ script = ExtResource("1_kes5e")
 collision_layer = 2
 collision_mask = 0
 
-[node name="Model" parent="CharacterBody3D" instance=ExtResource("2_ofvwj")]
+[node name="Generalist" parent="CharacterBody3D" instance=ExtResource("2_ofvwj")]
 transform = Transform3D(0.34, 0, 0, 0, 0.34, 0, 0, 0, 0.34, 0, -0.316156, 0)
+
+[node name="Blower" parent="CharacterBody3D" instance=ExtResource("3_u4sli")]
+transform = Transform3D(0.34, 0, 0, 0, 0.34, 0, 0, 0, 0.34, 0, -0.316156, 0)
+visible = false
+
+[node name="Popper" parent="CharacterBody3D" instance=ExtResource("4_yy85d")]
+transform = Transform3D(0.34, 0, 0, 0, 0.34, 0, 0, 0, 0.34, 0, -0.316156, 0)
+visible = false
+
+[node name="Pusher" parent="CharacterBody3D" instance=ExtResource("5_1oc7x")]
+transform = Transform3D(0.34, 0, 0, 0, 0.34, 0, 0, 0, 0.34, 0, -0.316156, 0)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 shape = SubResource("SphereShape3D_lnxdv")

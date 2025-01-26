@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dj13m5ehxckna"]
+
+[ext_resource type="PackedScene" uid="uid://by0no5viumjpk" path="res://Assets/Blower.glb" id="1_gnb6i"]
+[ext_resource type="Script" path="res://character_model.gd" id="2_6gkqv"]
+
+[node name="Blower" instance=ExtResource("1_gnb6i")]
+script = ExtResource("2_6gkqv")
+
+[node name="Bubble4" parent="Armature4/Skeleton3D" index="0"]
+transform = Transform3D(0.484097, 4.50842e-10, 1.35255e-09, 1.35256e-09, -6.8786e-15, -0.484097, -4.50849e-10, 0.484097, 6.87944e-15, -9.60659e-07, 1.60764, 1.18205)
+
+[node name="Eyes4" parent="Armature4/Skeleton3D" index="1"]
+transform = Transform3D(0.399965, 3.72489e-10, 1.11748e-09, 1.11749e-09, -5.68315e-15, -0.399965, -3.72495e-10, 0.399965, 5.68384e-15, -6.98492e-09, 1.60764, 1.18205)
+
+[node name="Head4" parent="Armature4/Skeleton3D" index="2"]
+transform = Transform3D(0.999912, -2.44539e-09, -7.10481e-15, 2.79373e-09, 0.875241, -1.42096e-14, -7.10481e-15, -1.24379e-14, 0.999912, -7.45058e-09, 2.00761, 1.87933e-08)
+
+[node name="Mouth4" parent="Armature4/Skeleton3D" index="3"]
+transform = Transform3D(0.157714, 2.198e-10, 3.98559e-10, 4.40649e-10, -0.039149, -0.152778, -1.1399e-10, 0.152778, -0.039149, -9.60659e-07, 1.60764, 0.882078)
