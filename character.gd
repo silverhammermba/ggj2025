@@ -1,7 +1,6 @@
 class_name Character extends Node3D
 
-@onready var animation: AnimationPlayer = $CharacterBody3D/AnimationPlayer
-@onready var sprite: Sprite3D = $CharacterBody3D/Sprite3D
+@onready var model: CharacterModel = $CharacterBody3D/Model
 var gridPos := Vector3i.ZERO
 var bubbleVictim = false
 
@@ -20,15 +19,16 @@ var timeout := 0
 func _ready() -> void:
 	match team:
 		0:
-			sprite.modulate = Color.GREEN
+			pass
 		1:
-			sprite.modulate = Color.BLUE
+			model.rotate_y(PI / 2)
 
 func deselect() -> void:
-	animation.stop()
+	# TODO: if your last action has animation, this cancels it. somehow wait for it to finish
+	model.stop()
 
 func select() -> void:
-	animation.play("bob")
+	model.walk()
 
 # reset character, return true if they need to respawn
 func new_turn(currentTeam: int) -> bool:
@@ -106,5 +106,6 @@ func move(moveCoords: Vector3i, grid: Map) -> void:
 		_: # collision with something we don't know how to handle
 			assert(obstacle == -1)
 	
+	model.walk()
 	setPos(moveCoords, grid)
 	fall(grid)

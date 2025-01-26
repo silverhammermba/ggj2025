@@ -114,14 +114,17 @@ func _physics_process(_delta: float) -> void:
 					if currentCharacter.grid_dist(clickedGridPosition) <= bubbleRange:
 						if spawn_bubble(clickedGridPosition):
 							currentCharacter.actions -= 1
+							currentCharacter.model.blow()
 				else:
 					var bubble := result["collider"].get_parent() as Bubble
 					if currentCharacter.classPopper and currentCharacter.grid_dist(bubble.gridPos) <= popRange:
 						bubble.pop(gridMap)
 						currentCharacter.actions -= 1
+						currentCharacter.model.pop()
 					elif (currentCharacter.classPusher and currentCharacter.grid_dist(bubble.gridPos) <= pushRange):
 						bubble.push(currentCharacter.gridPos, gridMap)
 						currentCharacter.actions -= 1
+						currentCharacter.model.push()
 
 func spawn_bubble(pos: Vector3i) -> bool:
 	for ch in characters:

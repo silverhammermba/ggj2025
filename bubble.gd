@@ -46,7 +46,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	hasVictim = true
 	victim = ch
 	victim.bubbleVictim = true
-	victim.animation.stop()
+	victim.model.stop()
 	animation.play("bob")
 	
 	label.text = str(liveTime)
