@@ -8,7 +8,7 @@ class_name Game extends Node3D
 @export var bubbleScene : PackedScene
 @export var bubbleRange = 3
 @export var popRange = 2
-@export var pushRange = 1
+@export var pushRange = 2
 @export var pushDistance = 2
 
 var characters: Array[Character] = []
@@ -92,39 +92,54 @@ func _process(_delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	if newRayCast:
 		newRayCast = false
-		if selection < 0 or characters[selection] == null or characters[selection].actions <= 0:
+		if selection < 0 or characters[selection] == null:
 			return
 			
 		var currentCharacter := characters[selection]
 		
-		# blowers need ground, poppers/pushers need bubbles
-		var mask = 1 if currentCharacter.classBlower else 4
+		if currentCharacter.actions <= 0 or currentCharacter.bubbleVictim or currentCharacter.team != currentTeam:
+			return
 		
 		var space_state := get_world_3d().direct_space_state
-		var query := PhysicsRayQueryParameters3D.create(rayOrigin, rayEnd, mask)
-		var result := space_state.intersect_ray(query)
+		var groundQuery := PhysicsRayQueryParameters3D.create(rayOrigin, rayEnd, 1)
+		var groundResult := space_state.intersect_ray(groundQuery)
+		var bubbleQuery := PhysicsRayQueryParameters3D.create(rayOrigin, rayEnd, 4)
+		var bubbleResult := space_state.intersect_ray(bubbleQuery)
 		
-		if "position" in result:
-			var clickedPosition: Vector3 = result["position"]
-			var clickedNormal: Vector3 = result["normal"]
-			
-			if(!currentCharacter.bubbleVictim):
-				if currentCharacter.classBlower:
-					var clickedGridPosition := gridMap.global_to_open(clickedPosition + clickedNormal * 0.1)
-					if currentCharacter.grid_dist(clickedGridPosition) <= bubbleRange:
-						if spawn_bubble(clickedGridPosition):
+		if currentCharacter.classBlower:
+			if "position" not in groundResult:
+				return
+			var clickedPosition: Vector3 = groundResult["position"]
+			var clickedNormal: Vector3 = groundResult["normal"]
+			var clickedGridPosition := gridMap.global_to_open(clickedPosition + clickedNormal * 0.1)
+			if currentCharacter.grid_dist(clickedGridPosition) <= bubbleRange:
+				if spawn_bubble(clickedGridPosition):
+					currentCharacter.actions -= 1
+					currentCharacter.model.blow()
+		elif currentCharacter.classPopper:
+			if "position" not in bubbleResult:
+				return
+			var bubble := bubbleResult["collider"].get_parent() as Bubble
+			if currentCharacter.grid_dist(bubble.gridPos) <= popRange:
+				bubble.pop(gridMap)
+				currentCharacter.actions -= 1
+				currentCharacter.model.pop()
+		elif currentCharacter.classPusher:
+			if "position" in bubbleResult:
+				var bubble := bubbleResult["collider"].get_parent() as Bubble
+				if currentCharacter.grid_dist(bubble.gridPos) <= pushRange:
+					bubble.push(currentCharacter.gridPos, gridMap, bubbles)
+					currentCharacter.actions -= 1
+					currentCharacter.model.push()
+			elif "position" in groundResult:
+				var clickedPosition: Vector3 = groundResult["position"]
+				var clickedNormal: Vector3 = groundResult["normal"]
+				var clickedGridPosition := gridMap.global_to_open(clickedPosition + clickedNormal * 0.1)
+				for ch in characters:
+					if ch != self and ch.gridPos == clickedGridPosition:
+						if ch.push(currentCharacter.gridPos, gridMap, characters):
 							currentCharacter.actions -= 1
-							currentCharacter.model.blow()
-				else:
-					var bubble := result["collider"].get_parent() as Bubble
-					if currentCharacter.classPopper and currentCharacter.grid_dist(bubble.gridPos) <= popRange:
-						bubble.pop(gridMap)
-						currentCharacter.actions -= 1
-						currentCharacter.model.pop()
-					elif (currentCharacter.classPusher and currentCharacter.grid_dist(bubble.gridPos) <= pushRange):
-						bubble.push(currentCharacter.gridPos, gridMap)
-						currentCharacter.actions -= 1
-						currentCharacter.model.push()
+							currentCharacter.model.push()
 
 func spawn_bubble(pos: Vector3i) -> bool:
 	for ch in characters:

@@ -17,7 +17,7 @@ func pop(grid: Map) -> void:
 		victim.fall(grid)
 	queue_free()
 	
-func push(from: Vector3i, grid: Map) -> void:
+func push(from: Vector3i, grid: Map, bubbles: Array[Bubble]) -> bool:
 	var dir := gridPos - from
 	var moveCoords := gridPos + dir
 	
@@ -27,17 +27,23 @@ func push(from: Vector3i, grid: Map) -> void:
 		-1: # no collision
 			pass
 		0: # collision with block stops movement
-			return
+			return false
 		1: # collision with ramp moves you up
 			moveCoords += Vector3i.UP
 		_: # collision with something we don't know how to handle
 			assert(obstacle == -1)
+			
+	for bubble in bubbles:
+		if is_instance_valid(bubble) and bubble != self and bubble.gridPos == moveCoords:
+			return false
 	
 	gridPos = moveCoords
 	global_position = grid.map_to_global(gridPos)
 	
 	if hasVictim:
 		victim.setPos(gridPos, grid)
+	
+	return true
 	
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	var ch := body.get_parent() as Character

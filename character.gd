@@ -136,3 +136,35 @@ func move(moveCoords: Vector3i, grid: Map, characters: Array[Character]) -> void
 	
 	model.walk()
 	moves -= 1
+
+func push(from: Vector3i, grid: Map, characters: Array[Character]) -> bool:
+	var currPos := gridPos
+	var dir := gridPos - from
+	var moveCoords := gridPos + dir
+	
+	var obstacle := grid.get_cell_item(moveCoords)
+	
+	match obstacle:
+		-1: # no collision
+			pass
+		0: # collision with block stops movement
+			return false
+		1: # collision with ramp moves you up
+			moveCoords += Vector3i.UP
+		_: # collision with something we don't know how to handle
+			assert(obstacle == -1)
+			
+	setPos(moveCoords, grid)
+	fall(grid)
+	
+	var sameSpace := false
+	for ch in characters:
+		if ch != self and ch.timeout <= 0 and ch.gridPos == gridPos:
+			sameSpace = true
+			break
+	
+	if sameSpace:
+		setPos(currPos, grid)
+		return false
+
+	return true
