@@ -2,7 +2,6 @@ class_name Game extends Node3D
 
 @onready var gridMap: Map = $map
 @onready var camera: Camera3D = $"camera pivot/Camera3D"
-@onready var uiLabel: Label = $Control/Label
 
 @onready var p1UI: CharacterUI = $GameUI/GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_1
 @onready var p2UI: CharacterUI = $GameUI/GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_2
@@ -204,8 +203,6 @@ func _input(event: InputEvent) -> void:
 		newRayCast = true
 		
 func update_ui() -> void:
-	var ui := "Team "
-	ui += "Green" if currentTeam == 0 else "Blue"	
 	if currentTeam != 0:
 		p1Arrow.modulate = Color(0,0,0,0)
 		p2Arrow.modulate = Color(1,1,1,1)
@@ -217,8 +214,4 @@ func update_ui() -> void:
 	for idx in range(0, characters.size()):
 		var ch := characters[idx]
 		charUIs[idx].updateUI(ch,idx == selection)
-		var presel := ("> " if idx == selection else "")
-		var postsel := (" <" if idx == selection else "")
-		ui += "\n%s%s%s" % [presel, ch.status(), postsel]
-	uiLabel.text = ui
 		
