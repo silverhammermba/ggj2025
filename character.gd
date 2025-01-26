@@ -8,6 +8,10 @@ var model: CharacterModel
 var gridPos := Vector3i.ZERO
 var bubbleVictim = false
 
+@export var PopperImg : Texture2D
+@export var PusherImg : Texture2D
+@export var BlowerImg : Texture2D
+
 @export var classBlower := false
 @export var classPopper := false
 @export var classPusher := false
@@ -74,6 +78,13 @@ func name() -> String:
 		klass = "Pusher"
 	return klass
 
+func picture() -> Texture2D:
+	if classPopper:
+		return PopperImg
+	elif classPusher:
+		return PusherImg
+	return BlowerImg
+	
 func status() -> String:
 	var klass := "Blower"
 	if classPopper:

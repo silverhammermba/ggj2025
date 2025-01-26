@@ -1,10 +1,11 @@
-class_name CharacterUI extends NinePatchRect
+class_name CharacterUI extends NinePatchRect 
 
 @onready var movesText: RichTextLabel = $Char_1_TextBoxes/Char_1_Moves
 @onready var actionsText: RichTextLabel = $Char_1_TextBoxes/Char_1_Actions
 @onready var nameText: RichTextLabel = $NinePatchRect/Char_Name
 
 @onready var rec: NinePatchRect = $NinePatchRect
+@onready var pic: TextureRect = $PFP
 
 @export var newTex: Texture2D
 @export var newBox: Texture2D
@@ -30,6 +31,7 @@ func updateUI(character: Character, isSelected: bool, currentTeam: int):
 	movesText.text = moves
 	actionsText.text = actions
 	nameText.text = character.name()
+	pic.texture = character.picture() 
 	
 	scale = Vector2(1.0,1.0) if isSelected else Vector2(0.8,0.8)
 	
