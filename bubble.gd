@@ -41,15 +41,15 @@ func push(from: Vector3i, grid: Map) -> void:
 	
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	var ch := body.get_parent() as Character
-	if !ch:
+	if !ch :
 		return
-	hasVictim = true
-	victim = ch
-	victim.bubbleVictim = true
-	victim.model.stop()
-	animation.play("bob")
-	
-	label.text = str(liveTime)
+	if(!hasVictim):
+		hasVictim = true
+		victim = ch
+		victim.bubbleVictim = true
+		victim.model.stop()
+		animation.play("bob")
+		label.text = str(liveTime)
 	
 
 func liveSpindown(grid: Map) -> void:
