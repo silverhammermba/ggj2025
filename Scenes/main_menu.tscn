@@ -65,6 +65,7 @@ size_flags_vertical = 0
 texture = ExtResource("1_f7vu8")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+top_level = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -239,6 +240,7 @@ autowrap_mode = 0
 
 [node name="CreditsBox" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 50
 
@@ -274,7 +276,7 @@ text = "Max Anselm - Programmer
 Eliott Kiefer - Programmer
 Jovan Kouakou - UI/Graphics
 Rob Scales - 3D Artist
-Thieyazen - Concept Artist"
+Thiyazan Qaissi - Concept Artist"
 autowrap_mode = 0
 
 [node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/CreditsBox/VBoxContainer3"]

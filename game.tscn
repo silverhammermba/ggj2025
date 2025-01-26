@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bg3jpfe55aita"]
+[gd_scene load_steps=10 format=3 uid="uid://bg3jpfe55aita"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_demmu"]
 [ext_resource type="PackedScene" uid="uid://q7t0uad308xi" path="res://bubble.tscn" id="2_4fehy"]
 [ext_resource type="PackedScene" uid="uid://drqg77fxlwpfe" path="res://map.tscn" id="2_hw383"]
 [ext_resource type="PackedScene" uid="uid://c5dgohn5rphyu" path="res://sphere.tscn" id="2_vkvgg"]
 [ext_resource type="PackedScene" uid="uid://dgc7cu5viowl" path="res://character.tscn" id="3_jd6sq"]
+[ext_resource type="PackedScene" uid="uid://daypnlsfnja44" path="res://Scenes/game_ui.tscn" id="6_iy754"]
 [ext_resource type="Texture2D" uid="uid://cq2byr5y4toxv" path="res://Assets/UI/T_VaporGrid.svg" id="6_tsie4"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_s5pne"]
@@ -61,6 +62,8 @@ team = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.60702, 2.01158, 2.47807)
 classPusher = true
 team = 1
+
+[node name="GameUI" parent="." instance=ExtResource("6_iy754")]
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
