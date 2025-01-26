@@ -12,6 +12,7 @@ func set_spawn(pos: Vector3i, grid: Map) -> void:
 func pop() -> void:
 	if(hasVictim):
 		victim.bubbleVictim = false
+	
 	queue_free()
 
 
@@ -21,6 +22,6 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	hasVictim = true
 	victim = body.get_parent()
 	victim.bubbleVictim = true
-	victim.reparent(self)
+	#victim.reparent(self)
 	victim.animation.stop()
 	animation.play("bob")
