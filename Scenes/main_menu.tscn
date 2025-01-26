@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://i8lqw4xtw1v4"]
+[gd_scene load_steps=15 format=3 uid="uid://i8lqw4xtw1v4"]
 
 [ext_resource type="Texture2D" uid="uid://cmva47subm4jr" path="res://Assets/UI/T_RectanglePiece_DarkBlue.svg" id="1_f7vu8"]
 [ext_resource type="Texture2D" uid="uid://blhof8hu3t7v1" path="res://Assets/UI/T_LPiece.svg" id="1_fspwa"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://culxrdnqo3klf" path="res://Assets/UI/T_RectanglePiece_Alt_DarkBlue.svg" id="6_b840e"]
 [ext_resource type="Texture2D" uid="uid://dp4jq7xijnvky" path="res://Assets/UI/T_RectanglePiece.svg" id="6_u2l8s"]
 [ext_resource type="Script" path="res://Scenes/menu_button.gd" id="7_bb6ff"]
+[ext_resource type="Texture2D" uid="uid://d23vk6fyho0ka" path="res://Assets/UI/Pop_Logo.png" id="11_v4fvf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kcd63"]
 bg_color = Color(0.863329, 0.976549, 0.999285, 1)
@@ -300,6 +301,18 @@ scale = Vector2(1.5, 1.5)
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("6_b840e")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -885.0
+offset_top = 44.0
+offset_right = -85.0
+offset_bottom = 844.0
+grow_horizontal = 0
+texture = ExtResource("11_v4fvf")
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
