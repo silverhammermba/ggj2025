@@ -255,7 +255,7 @@ grow_vertical = 2
 theme_override_constants/line_separation = 15
 theme_override_fonts/normal_font = ExtResource("2_qnnao")
 theme_override_font_sizes/normal_font_size = 24
-text = "Max - Programmer
+text = "Max Anselm - Programmer
 Elliot - Programmer
 Jovan Kouakou - UI/Graphics
 Rob Scales - 3D Artist
