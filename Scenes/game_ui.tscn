@@ -1,4 +1,10 @@
-[gd_scene format=3 uid="uid://daypnlsfnja44"]
+[gd_scene load_steps=6 format=3 uid="uid://daypnlsfnja44"]
+
+[ext_resource type="Texture2D" uid="uid://bbefxwqy7c0ry" path="res://Assets/UI/T_PortraitHoldingShape.svg" id="1_vvhq7"]
+[ext_resource type="Texture2D" uid="uid://csysn41tioide" path="res://Assets/UI/T_Nameplate.svg" id="2_guiu7"]
+[ext_resource type="FontFile" uid="uid://pgw0h42mqa23" path="res://Assets/Fonts/Audiowide-Regular.ttf" id="3_gjkki"]
+[ext_resource type="Texture2D" uid="uid://dj5hny22n4fby" path="res://Assets/UI/T_PortraitHoldingShape_Flipped.svg" id="4_qnd60"]
+[ext_resource type="Texture2D" uid="uid://i1hax6hs4rsk" path="res://Assets/UI/T_Nameplate_Flipped.svg" id="5_g1af2"]
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -7,3 +13,265 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="GUI" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -400.0
+offset_right = 645.0
+grow_vertical = 0
+theme_override_constants/margin_left = 45
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="GUI"]
+layout_mode = 2
+
+[node name="Player_1_Container" type="HBoxContainer" parent="GUI/HBoxContainer3"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="Char_1" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_1_Container"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("1_vvhq7")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_1_Container/Char_1"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -60.0
+offset_right = 200.0
+grow_vertical = 0
+texture = ExtResource("2_guiu7")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_1_Container/Char_1/NinePatchRect"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -20.0
+offset_right = 60.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.0872665
+theme_override_fonts/normal_font = ExtResource("3_gjkki")
+theme_override_font_sizes/normal_font_size = 30
+text = "Sample"
+
+[node name="Char_2" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_1_Container"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("1_vvhq7")
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_1_Container/Char_2"]
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -50.0
+offset_right = 60.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_guiu7")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_1_Container/Char_2/NinePatchRect2"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -40.0
+offset_right = 50.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 0.0872665
+theme_override_fonts/normal_font = ExtResource("3_gjkki")
+theme_override_font_sizes/normal_font_size = 24
+text = "Sample"
+
+[node name="Char_3" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_1_Container"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("1_vvhq7")
+
+[node name="NinePatchRect3" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_1_Container/Char_3"]
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -50.0
+offset_right = 60.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_guiu7")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_1_Container/Char_3/NinePatchRect3"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -40.0
+offset_right = 50.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 0.0872665
+theme_override_fonts/normal_font = ExtResource("3_gjkki")
+theme_override_font_sizes/normal_font_size = 24
+text = "Sample"
+
+[node name="Player_2_Container" type="HBoxContainer" parent="GUI/HBoxContainer3"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="Char_3" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_2_Container"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("4_qnd60")
+
+[node name="NinePatchRect3" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_2_Container/Char_3"]
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -50.0
+offset_right = 60.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("5_g1af2")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_2_Container/Char_3/NinePatchRect3"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -32.0
+offset_right = 50.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = -0.0872665
+theme_override_fonts/normal_font = ExtResource("3_gjkki")
+theme_override_font_sizes/normal_font_size = 24
+text = "Sample"
+
+[node name="Char_2" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_2_Container"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("4_qnd60")
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_2_Container/Char_2"]
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -50.0
+offset_right = 60.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("5_g1af2")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_2_Container/Char_2/NinePatchRect2"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -32.0
+offset_right = 50.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = -0.0872665
+theme_override_fonts/normal_font = ExtResource("3_gjkki")
+theme_override_font_sizes/normal_font_size = 24
+text = "Sample"
+
+[node name="Char_1" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_2_Container"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("4_qnd60")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_2_Container/Char_1"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -60.0
+offset_right = 200.0
+grow_vertical = 0
+texture = ExtResource("5_g1af2")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_2_Container/Char_1/NinePatchRect"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -40.0
+offset_right = 60.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = -0.0872665
+theme_override_fonts/normal_font = ExtResource("3_gjkki")
+theme_override_font_sizes/normal_font_size = 30
+text = "Sample"
