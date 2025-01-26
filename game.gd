@@ -4,6 +4,16 @@ class_name Game extends Node3D
 @onready var camera: Camera3D = $"camera pivot/Camera3D"
 @onready var uiLabel: Label = $Control/Label
 
+@onready var p1UI: CharacterUI = $GameUI/GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_1
+@onready var p2UI: CharacterUI = $GameUI/GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_2
+@onready var p3UI: CharacterUI = $GameUI/GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_3
+@onready var p4UI: CharacterUI = $GameUI/GUI/HBoxContainer3/Player_2_Margin/Player_2_Container/Char_4
+@onready var p5UI: CharacterUI = $GameUI/GUI/HBoxContainer3/Player_2_Margin/Player_2_Container/Char_5
+@onready var p6UI: CharacterUI = $GameUI/GUI/HBoxContainer3/Player_2_Margin/Player_2_Container/Char_6
+
+@onready var p1Arrow: NinePatchRect = $GameUI/GUI/HBoxContainer3/Arrow_Margin/HBoxContainer/Player_1_Arrow
+@onready var p2Arrow: NinePatchRect = $GameUI/GUI/HBoxContainer3/Arrow_Margin/HBoxContainer/Player_2_Arrow
+
 @export var RAY_CAST_LENGTH := 1000
 @export var bubbleScene : PackedScene
 @export var bubbleRange = 3
@@ -180,11 +190,18 @@ func _input(event: InputEvent) -> void:
 		
 func update_ui() -> void:
 	var ui := "Team "
-	ui += "Green" if currentTeam == 0 else "Blue"
+	ui += "Green" if currentTeam == 0 else "Blue"	
+	if currentTeam != 0:
+		p1Arrow.modulate = Color(0,0,0,0)
+		p2Arrow.modulate = Color(1,1,1,1)
+	else:
+		p2Arrow.modulate = Color(0,0,0,0)
+		p1Arrow.modulate = Color(1,1,1,1)
+	
+	var charUIs: Array[CharacterUI] = [p1UI,p2UI,p3UI,p4UI,p5UI,p6UI]
 	for idx in range(0, characters.size()):
 		var ch := characters[idx]
-		if ch.team != currentTeam:
-			continue
+		charUIs[idx].updateUI(ch,idx == selection)
 		var presel := ("> " if idx == selection else "")
 		var postsel := (" <" if idx == selection else "")
 		ui += "\n%s%s%s" % [presel, ch.status(), postsel]

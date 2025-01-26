@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnjmorjlm0dfy"]
+
+[ext_resource type="Texture2D" uid="uid://bbefxwqy7c0ry" path="res://Assets/UI/T_PortraitHoldingShape.svg" id="1_5xdww"]
+[ext_resource type="FontFile" uid="uid://pgw0h42mqa23" path="res://Assets/Fonts/Audiowide-Regular.ttf" id="2_gqtx4"]
+[ext_resource type="Script" path="res://character_ui.gd" id="2_tq4py"]
+[ext_resource type="Texture2D" uid="uid://dj5hny22n4fby" path="res://Assets/UI/T_PortraitHoldingShape_Flipped.svg" id="3_4ad7s"]
+[ext_resource type="Texture2D" uid="uid://csysn41tioide" path="res://Assets/UI/T_Nameplate.svg" id="3_oel1k"]
+[ext_resource type="Texture2D" uid="uid://i1hax6hs4rsk" path="res://Assets/UI/T_Nameplate_Flipped.svg" id="4_safm4"]
+
+[node name="Char_1" type="NinePatchRect"]
+custom_minimum_size = Vector2(200, 200)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("1_5xdww")
+script = ExtResource("2_tq4py")
+newTex = ExtResource("3_4ad7s")
+newBox = ExtResource("4_safm4")
+
+[node name="Char_1_TextBoxes" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 0
+offset_top = -70.0
+offset_right = 200.0
+offset_bottom = 30.0
+
+[node name="Char_1_Moves" type="RichTextLabel" parent="Char_1_TextBoxes"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_gqtx4")
+theme_override_font_sizes/normal_font_size = 24
+text = "Moves - "
+fit_content = true
+scroll_active = false
+
+[node name="Char_1_Actions" type="RichTextLabel" parent="Char_1_TextBoxes"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_gqtx4")
+theme_override_font_sizes/normal_font_size = 24
+text = "Actions - "
+fit_content = true
+scroll_active = false
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -60.0
+offset_right = 200.0
+grow_vertical = 0
+texture = ExtResource("3_oel1k")
+
+[node name="Char_Name" type="RichTextLabel" parent="NinePatchRect"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -20.0
+offset_right = 60.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.0872665
+theme_override_fonts/normal_font = ExtResource("2_gqtx4")
+theme_override_font_sizes/normal_font_size = 30
+text = "Sample"

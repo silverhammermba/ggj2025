@@ -64,6 +64,14 @@ func has_actions(currentTeam: int) -> bool:
 		return false
 	return actions > 0 or moves > 0
 
+func name() -> String:
+	var klass := "Blower"
+	if classPopper:
+		klass = "Popper"
+	elif classPusher:
+		klass = "Pusher"
+	return klass
+
 func status() -> String:
 	var klass := "Blower"
 	if classPopper:
