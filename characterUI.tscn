@@ -8,7 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://i1hax6hs4rsk" path="res://Assets/UI/T_Nameplate_Flipped.svg" id="4_safm4"]
 
 [node name="Char_1" type="NinePatchRect"]
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(180, 180)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -180.0
+offset_right = 180.0
+grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
 texture = ExtResource("1_5xdww")
@@ -53,7 +59,7 @@ grow_vertical = 0
 texture = ExtResource("3_oel1k")
 
 [node name="Char_Name" type="RichTextLabel" parent="NinePatchRect"]
-custom_minimum_size = Vector2(120, 30)
+custom_minimum_size = Vector2(140, 30)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -70,3 +76,4 @@ rotation = 0.0872665
 theme_override_fonts/normal_font = ExtResource("2_gqtx4")
 theme_override_font_sizes/normal_font_size = 30
 text = "Sample"
+scroll_active = false
