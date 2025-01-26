@@ -53,3 +53,22 @@ team = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.60702, 2.01158, 2.47807)
 classPusher = true
 team = 1
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 23.0
+offset_right = 64.0
+offset_bottom = 46.0
+text = "Team Green
+Pusher: 3 move, 1 action
+Blower: 3 move, 2 action
+Popper: 3 move, 1 action"

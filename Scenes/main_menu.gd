@@ -6,13 +6,6 @@ extends Control
 func _ready():
 	$MarginContainer/HBoxContainer/VBoxContainer2/StartButton.grab_focus() # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-		
-	
-
 func _on_options_button_pressed():
 	pass # Replace with function body.
 
