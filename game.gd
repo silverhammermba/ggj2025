@@ -26,21 +26,14 @@ func _ready() -> void:
 	for node in chars:
 		var ch: Character = node
 		characters.append(ch)
-		# give each character a free "move" to snap to the grid
-		ch.moves = 1
-		ch.move(gridMap.global_to_map(ch.global_position), gridMap)
-		#ch.move(gridMap.global_to_map(ch.global_position), gridMap)
+		# snap chars to grid and set them on the floor
+		ch.setPos(gridMap.global_to_map(ch.global_position), gridMap)
+		ch.fall(gridMap)
 		ch.new_turn(currentTeam)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	var prev_selection := selection
-	
-	var new_chars: Array[Character] = []
-	for ch in characters:
-		if is_instance_valid(ch):
-			new_chars.append(ch)
-	characters = new_chars
 	
 	var has_actions := false
 	for ch in characters:
@@ -70,7 +63,7 @@ func _process(_delta: float) -> void:
 				selection = characters.size() - 1
 			if characters[selection].has_actions(currentTeam):
 				break
-	elif Input.is_action_just_pressed("next char") or (selection >= 0 and characters[selection].team != currentTeam):
+	elif Input.is_action_just_pressed("next char") or selection < 0 or !characters[selection].has_actions(currentTeam):
 		while true:
 			selection = (selection + 1) % characters.size()
 			if characters[selection].has_actions(currentTeam):
@@ -134,6 +127,10 @@ func spawn_bubble(pos: Vector3i) -> bool:
 		if ch.gridPos == pos:
 			# can't spawn a bubble directly on someone
 			return false
+	for bubble in bubbles:
+		if is_instance_valid(bubble) and bubble.gridPos == pos:
+			# can't spawn bubble on a bubble
+			return false
 	var bubble: Bubble = bubbleScene.instantiate()
 	bubbles.append(bubble)
 	add_child(bubble)
@@ -143,7 +140,27 @@ func spawn_bubble(pos: Vector3i) -> bool:
 func new_turn() -> void:
 	currentTeam = 1 - currentTeam
 	for ch in characters:
-		ch.new_turn(currentTeam)
+		if ch.new_turn(currentTeam):
+			while true:
+				var gridPos := Vector3i(randi_range(-2, 5), 0, randi_range(-2, 5))
+				while gridMap.get_cell_item(gridPos) != -1:
+					gridPos.y += 1
+				var occupied := false
+				for other in characters:
+					if other.gridPos == gridPos:
+						occupied = true
+						break
+				if occupied:
+					continue
+				for bubble in bubbles:
+					if is_instance_valid(bubble) and bubble.gridPos == gridPos:
+						occupied = true
+						break
+				if occupied:
+					continue
+				ch.setPos(gridPos, gridMap)
+				break
+				
 
 func _input(event: InputEvent) -> void:
 	var click := event as InputEventMouseButton
