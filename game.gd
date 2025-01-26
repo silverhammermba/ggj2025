@@ -2,6 +2,7 @@ class_name Game extends Node3D
 
 @onready var gridMap: Map = $map
 @onready var camera: Camera3D = $"camera pivot/Camera3D"
+@onready var uiLabel: Label = $Control/Label
 
 @export var RAY_CAST_LENGTH := 1000
 @export var bubbleScene : PackedScene
@@ -93,6 +94,7 @@ func _process(_delta: float) -> void:
 		if Input.is_action_just_pressed("move_right"):
 			var currentCharacter = characters[selection]
 			currentCharacter.move(currentCharacter.gridPos + Vector3i.RIGHT, gridMap)
+	update_ui()
 
 func _physics_process(_delta: float) -> void:
 	if newRayCast:
@@ -151,3 +153,17 @@ func _input(event: InputEvent) -> void:
 		rayOrigin = from
 		rayEnd = from + normal * RAY_CAST_LENGTH
 		newRayCast = true
+		
+func update_ui() -> void:
+	var ui := "Team "
+	ui += "Green" if currentTeam == 0 else "Blue"
+	for idx in range(0, characters.size()):
+		var ch := characters[idx]
+		if ch.team != currentTeam:
+			continue
+		var presel = "> " if idx == selection else ""
+		var postsel = " <" if idx == selection else ""
+		var klass := "Blower" if ch.classBlower else "Popper" if ch.classPopper else "Pusher"
+		ui += "\n%s%s: %d move, %d action%s" % [presel, klass, ch.moves, ch.actions, postsel]
+	uiLabel.text = ui
+		
