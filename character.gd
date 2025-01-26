@@ -16,6 +16,7 @@ var bubbleVictim = false
 @export var max_actions := 1
 @export var max_moves := 3
 @export var max_timeout := 3
+@export var fallPos := Vector3i(-50, 0, -50)
 var actions := 0
 var moves := 0
 var timeout := 0
@@ -98,15 +99,15 @@ func fall(grid: Map) -> void:
 		elif n == max_iter - 1:
 			# fell too far (or fell off map)
 			timeout = max_timeout
-			setPos(Vector3i(-50, 0, -50), grid)
+			setPos(fallPos, grid)
 			return
 	setPos(testPos, grid)
 
-func move(moveCoords: Vector3i, grid: Map) -> void:
+func move(moveCoords: Vector3i, grid: Map, characters: Array[Character]) -> void:
 	if moves <= 0 or bubbleVictim or timeout > 0:
 		return
 	
-	moves -= 1
+	var currPos = gridPos
 	
 	var obstacle := grid.get_cell_item(moveCoords)
 	
@@ -119,7 +120,19 @@ func move(moveCoords: Vector3i, grid: Map) -> void:
 			moveCoords += Vector3i.UP
 		_: # collision with something we don't know how to handle
 			assert(obstacle == -1)
-	
-	model.walk()
+
 	setPos(moveCoords, grid)
 	fall(grid)
+
+	var sameSpace := false
+	for ch in characters:
+		if ch != self and ch.timeout <= 0 and ch.gridPos == gridPos:
+			sameSpace = true
+			break
+	
+	if sameSpace:
+		setPos(currPos, grid)
+		return
+	
+	model.walk()
+	moves -= 1

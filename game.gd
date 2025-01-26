@@ -77,16 +77,16 @@ func _process(_delta: float) -> void:
 	if selection >= 0:
 		if Input.is_action_just_pressed("move_down"):
 			var currentCharacter = characters[selection]
-			currentCharacter.move(currentCharacter.gridPos + Vector3i.BACK, gridMap)
+			currentCharacter.move(currentCharacter.gridPos + Vector3i.BACK, gridMap, characters)
 		if Input.is_action_just_pressed("move_up"):
 			var currentCharacter = characters[selection]
-			currentCharacter.move(currentCharacter.gridPos + Vector3i.FORWARD, gridMap)
+			currentCharacter.move(currentCharacter.gridPos + Vector3i.FORWARD, gridMap, characters)
 		if Input.is_action_just_pressed("move_left"):
 			var currentCharacter = characters[selection]
-			currentCharacter.move(currentCharacter.gridPos + Vector3i.LEFT, gridMap)
+			currentCharacter.move(currentCharacter.gridPos + Vector3i.LEFT, gridMap, characters)
 		if Input.is_action_just_pressed("move_right"):
 			var currentCharacter = characters[selection]
-			currentCharacter.move(currentCharacter.gridPos + Vector3i.RIGHT, gridMap)
+			currentCharacter.move(currentCharacter.gridPos + Vector3i.RIGHT, gridMap, characters)
 	update_ui()
 
 func _physics_process(_delta: float) -> void:
