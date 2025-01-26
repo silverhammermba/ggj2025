@@ -1,10 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://dgc7cu5viowl"]
+[gd_scene load_steps=12 format=3 uid="uid://dgc7cu5viowl"]
 
 [ext_resource type="Script" path="res://character.gd" id="1_kes5e"]
-[ext_resource type="PackedScene" path="res://generalist.tscn" id="2_ofvwj"]
-[ext_resource type="PackedScene" path="res://blower.tscn" id="3_u4sli"]
-[ext_resource type="PackedScene" path="res://popper.tscn" id="4_yy85d"]
-[ext_resource type="PackedScene" path="res://pusher.tscn" id="5_1oc7x"]
+[ext_resource type="PackedScene" uid="uid://v24so1xiv2je" path="res://generalist.tscn" id="2_ofvwj"]
+[ext_resource type="PackedScene" uid="uid://dj13m5ehxckna" path="res://blower.tscn" id="3_u4sli"]
+[ext_resource type="PackedScene" uid="uid://dmk00ydps135k" path="res://popper.tscn" id="4_yy85d"]
+[ext_resource type="PackedScene" uid="uid://bkabxp1q85qp2" path="res://pusher.tscn" id="5_1oc7x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dqlwy"]
+transparency = 1
+albedo_color = Color(0, 0.380392, 1, 0.313726)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rihgc"]
+render_priority = -1
+transparency = 1
+albedo_color = Color(1, 0.317647, 0.721569, 0.301961)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lnxdv"]
 
@@ -47,6 +56,8 @@ _data = {
 
 [node name="Character" type="Node3D" groups=["character"]]
 script = ExtResource("1_kes5e")
+team0Overlay = SubResource("StandardMaterial3D_dqlwy")
+team1Overlay = SubResource("StandardMaterial3D_rihgc")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 collision_layer = 2
