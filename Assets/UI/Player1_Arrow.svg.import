@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmva47subm4jr"
-path="res://.godot/imported/T_RectanglePiece_DarkBlue.svg-7e1f763ec4ca2c8b8ec5581db9961428.ctex"
+uid="uid://c8vmeh3fidj1k"
+path="res://.godot/imported/Player1_Arrow.svg-67544e43af85fae4d0742015b984fca6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/T_RectanglePiece_DarkBlue.svg"
-dest_files=["res://.godot/imported/T_RectanglePiece_DarkBlue.svg-7e1f763ec4ca2c8b8ec5581db9961428.ctex"]
+source_file="res://Assets/UI/Player1_Arrow.svg"
+dest_files=["res://.godot/imported/Player1_Arrow.svg-67544e43af85fae4d0742015b984fca6.ctex"]
 
 [params]
 
@@ -20,10 +20,10 @@ compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
-compress/channel_pack=0
+compress/channel_pack=1
 mipmaps/generate=false
 mipmaps/limit=-1
-roughness/mode=0
+roughness/mode=1
 roughness/src_normal=""
 process/fix_alpha_border=false
 process/premult_alpha=false
