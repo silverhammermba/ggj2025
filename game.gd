@@ -103,8 +103,8 @@ func _physics_process(_delta: float) -> void:
 				var currentCharacter := characters[selection]
 				if(currentCharacter != null):
 					if(currentCharacter.classBlower and currentCharacter.position.distance_to(clickedPosition) <= bubbleRange):
-						spawn_bubble(clickedGridPosition)
-						currentCharacter.actions -= 1
+						if spawn_bubble(clickedGridPosition):
+							currentCharacter.actions -= 1
 					elif (currentCharacter.classPopper and currentCharacter.position.distance_to(clickedPosition) <= popRange):
 						if(result["collider"].get_parent() is Bubble):
 							result["collider"].get_parent().pop()
@@ -112,15 +112,16 @@ func _physics_process(_delta: float) -> void:
 		
 		newRayCast = false
 
-func spawn_bubble(pos: Vector3i) -> void:
+func spawn_bubble(pos: Vector3i) -> bool:
 	for ch in characters:
 		if ch.gridPos == pos:
 			# can't spawn a bubble directly on someone
-			return
+			return false
 	var bubble: Bubble = bubbleScene.instantiate()
 	bubbles.append(bubble)
 	add_child(bubble)
 	bubble.set_spawn(pos, gridMap)
+	return true
 	
 func new_turn() -> void:
 	currentTeam = 1 - currentTeam
