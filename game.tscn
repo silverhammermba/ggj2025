@@ -27,11 +27,14 @@ size = 7.757
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.0415285, 0.751016, -0.658977, -0.276375, 0.625177, 0.729912, 0.960152, 0.212437, 0.181599, 3.93567, 4.23665, 3.9178)
 
-[node name="Character" parent="." instance=ExtResource("3_jd6sq")]
+[node name="Blower" parent="." instance=ExtResource("3_jd6sq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.50185, 1.53101, 3.47875)
+classBlower = true
 
-[node name="Character2" parent="." instance=ExtResource("3_jd6sq")]
+[node name="Popper" parent="." instance=ExtResource("3_jd6sq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.50185, 1.5416, 5.85857)
+classPopper = true
 
-[node name="Character3" parent="." instance=ExtResource("3_jd6sq")]
+[node name="Pusher" parent="." instance=ExtResource("3_jd6sq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.60702, 2.01158, 2.47807)
+classPusher = true

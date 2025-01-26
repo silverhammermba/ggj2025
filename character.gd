@@ -2,7 +2,12 @@ class_name Character extends Node3D
 
 @onready var animation: AnimationPlayer = $CharacterBody3D/AnimationPlayer
 var gridPos: Vector3i = Vector3.ZERO
-var bubbleVictim = false;
+var bubbleVictim := false;
+
+@export var classBlower := false
+@export var classPopper := false
+@export var classPusher := false
+
 
 func deselect() -> void:
 	animation.stop()
