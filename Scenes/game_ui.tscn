@@ -1,12 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://daypnlsfnja44"]
+[gd_scene load_steps=4 format=3 uid="uid://daypnlsfnja44"]
 
-[ext_resource type="Texture2D" uid="uid://bbefxwqy7c0ry" path="res://Assets/UI/T_PortraitHoldingShape.svg" id="1_vvhq7"]
-[ext_resource type="Texture2D" uid="uid://csysn41tioide" path="res://Assets/UI/T_Nameplate.svg" id="2_guiu7"]
-[ext_resource type="FontFile" uid="uid://pgw0h42mqa23" path="res://Assets/Fonts/Audiowide-Regular.ttf" id="3_gjkki"]
+[ext_resource type="PackedScene" uid="uid://cnjmorjlm0dfy" path="res://characterUI.tscn" id="1_to7aj"]
 [ext_resource type="Texture2D" uid="uid://c8vmeh3fidj1k" path="res://Assets/UI/Player1_Arrow.svg" id="4_ahaxh"]
-[ext_resource type="Texture2D" uid="uid://dj5hny22n4fby" path="res://Assets/UI/T_PortraitHoldingShape_Flipped.svg" id="4_qnd60"]
 [ext_resource type="Texture2D" uid="uid://c5pjeka701ho8" path="res://Assets/UI/Player2_Arrow.svg" id="5_fbulm"]
-[ext_resource type="Texture2D" uid="uid://i1hax6hs4rsk" path="res://Assets/UI/T_Nameplate_Flipped.svg" id="5_g1af2"]
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -15,25 +11,31 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
 [node name="GUI" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(1000, 500)
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = -400.0
-offset_right = 645.0
+offset_left = -732.5
+offset_top = -500.0
+offset_right = 732.5
+grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/margin_left = 45
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="GUI"]
 custom_minimum_size = Vector2(1000, 200)
 layout_mode = 2
 size_flags_vertical = 8
+theme_override_constants/separation = 225
 
 [node name="Player_1_Margin" type="MarginContainer" parent="GUI/HBoxContainer3"]
 layout_mode = 2
-theme_override_constants/margin_left = -5
 
 [node name="Player_1_Container" type="HBoxContainer" parent="GUI/HBoxContainer3/Player_1_Margin"]
 custom_minimum_size = Vector2(470, 250)
@@ -42,202 +44,17 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_constants/separation = 10
 
-[node name="Char_1" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container"]
-custom_minimum_size = Vector2(200, 200)
+[node name="Char_1" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container" instance=ExtResource("1_to7aj")]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-texture = ExtResource("1_vvhq7")
 
-[node name="Char_1_TextBoxes" type="VBoxContainer" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_1"]
-custom_minimum_size = Vector2(200, 100)
-layout_mode = 0
-offset_top = -70.0
-offset_right = 200.0
-offset_bottom = 30.0
-
-[node name="Char_1_Moves" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_1/Char_1_TextBoxes"]
-custom_minimum_size = Vector2(30, 30)
+[node name="Char_2" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container" instance=ExtResource("1_to7aj")]
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("3_gjkki")
-theme_override_font_sizes/normal_font_size = 24
-text = "Moves - "
-fit_content = true
-scroll_active = false
 
-[node name="Char_1_Actions" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_1/Char_1_TextBoxes"]
-custom_minimum_size = Vector2(30, 30)
+[node name="Char_3" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container" instance=ExtResource("1_to7aj")]
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("3_gjkki")
-theme_override_font_sizes/normal_font_size = 24
-text = "Actions - "
-fit_content = true
-scroll_active = false
-
-[node name="NinePatchRect" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_1"]
-custom_minimum_size = Vector2(200, 60)
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -60.0
-offset_right = 200.0
-grow_vertical = 0
-texture = ExtResource("2_guiu7")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_1/NinePatchRect"]
-custom_minimum_size = Vector2(120, 30)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -60.0
-offset_top = -20.0
-offset_right = 60.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 0.0872665
-theme_override_fonts/normal_font = ExtResource("3_gjkki")
-theme_override_font_sizes/normal_font_size = 30
-text = "Sample"
-
-[node name="Char_2" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container"]
-custom_minimum_size = Vector2(120, 120)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-texture = ExtResource("1_vvhq7")
-
-[node name="Char_2_TextBoxes2" type="VBoxContainer" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_2"]
-custom_minimum_size = Vector2(120, 100)
-layout_mode = 1
-offset_top = -60.0
-offset_right = 120.0
-offset_bottom = 40.0
-theme_override_constants/separation = 0
-
-[node name="Char_2_Moves" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_2/Char_2_TextBoxes2"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("3_gjkki")
-theme_override_font_sizes/normal_font_size = 18
-text = "Moves - "
-fit_content = true
-scroll_active = false
-
-[node name="Char_2_Actions" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_2/Char_2_TextBoxes2"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("3_gjkki")
-theme_override_font_sizes/normal_font_size = 18
-text = "Actions - "
-fit_content = true
-scroll_active = false
-
-[node name="NinePatchRect2" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_2"]
-custom_minimum_size = Vector2(120, 50)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -60.0
-offset_top = -50.0
-offset_right = 60.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("2_guiu7")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_2/NinePatchRect2"]
-custom_minimum_size = Vector2(100, 30)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -50.0
-offset_top = -40.0
-offset_right = 50.0
-grow_horizontal = 2
-grow_vertical = 0
-rotation = 0.0872665
-theme_override_fonts/normal_font = ExtResource("3_gjkki")
-theme_override_font_sizes/normal_font_size = 24
-text = "Sample"
-
-[node name="Char_3" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container"]
-custom_minimum_size = Vector2(120, 120)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-texture = ExtResource("1_vvhq7")
-
-[node name="Char_3_TextBoxes3" type="VBoxContainer" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_3"]
-custom_minimum_size = Vector2(120, 100)
-layout_mode = 1
-offset_top = -60.0
-offset_right = 120.0
-offset_bottom = 40.0
-theme_override_constants/separation = 0
-
-[node name="Char_3_Moves" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_3/Char_3_TextBoxes3"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("3_gjkki")
-theme_override_font_sizes/normal_font_size = 18
-text = "Moves - "
-fit_content = true
-scroll_active = false
-
-[node name="Char_3_Actions" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_3/Char_3_TextBoxes3"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("3_gjkki")
-theme_override_font_sizes/normal_font_size = 18
-text = "Actions - "
-fit_content = true
-scroll_active = false
-
-[node name="NinePatchRect3" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_3"]
-custom_minimum_size = Vector2(120, 50)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -60.0
-offset_top = -50.0
-offset_right = 60.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("2_guiu7")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_1_Margin/Player_1_Container/Char_3/NinePatchRect3"]
-custom_minimum_size = Vector2(100, 30)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -50.0
-offset_top = -40.0
-offset_right = 50.0
-grow_horizontal = 2
-grow_vertical = 0
-rotation = 0.0872665
-theme_override_fonts/normal_font = ExtResource("3_gjkki")
-theme_override_font_sizes/normal_font_size = 24
-text = "Sample"
 
 [node name="Arrow_Margin" type="MarginContainer" parent="GUI/HBoxContainer3"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -245,29 +62,31 @@ theme_override_constants/margin_top = 125
 theme_override_constants/margin_bottom = 25
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GUI/HBoxContainer3/Arrow_Margin"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme_override_constants/separation = 20
+theme_override_constants/separation = 45
 
 [node name="Player_1_Arrow" type="NinePatchRect" parent="GUI/HBoxContainer3/Arrow_Margin/HBoxContainer"]
-custom_minimum_size = Vector2(50, 75)
+custom_minimum_size = Vector2(75, 100)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 8
+size_flags_vertical = 4
 texture = ExtResource("4_ahaxh")
 
 [node name="Player_2_Arrow" type="NinePatchRect" parent="GUI/HBoxContainer3/Arrow_Margin/HBoxContainer"]
-custom_minimum_size = Vector2(50, 75)
+custom_minimum_size = Vector2(75, 100)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 8
+size_flags_vertical = 4
 texture = ExtResource("5_fbulm")
 
 [node name="Player_2_Margin" type="MarginContainer" parent="GUI/HBoxContainer3"]
 layout_mode = 2
-theme_override_constants/margin_left = 15
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
 
 [node name="Player_2_Container" type="HBoxContainer" parent="GUI/HBoxContainer3/Player_2_Margin"]
 custom_minimum_size = Vector2(470, 250)
@@ -276,145 +95,11 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_constants/separation = 10
 
-[node name="Char_3" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_2_Margin/Player_2_Container"]
-custom_minimum_size = Vector2(120, 120)
+[node name="Char_4" parent="GUI/HBoxContainer3/Player_2_Margin/Player_2_Container" instance=ExtResource("1_to7aj")]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-texture = ExtResource("4_qnd60")
 
-[node name="NinePatchRect3" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_2_Margin/Player_2_Container/Char_3"]
-custom_minimum_size = Vector2(120, 50)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -60.0
-offset_top = -50.0
-offset_right = 60.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("5_g1af2")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_2_Margin/Player_2_Container/Char_3/NinePatchRect3"]
-custom_minimum_size = Vector2(100, 30)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -50.0
-offset_top = -32.0
-offset_right = 50.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 0
-rotation = -0.0872665
-theme_override_fonts/normal_font = ExtResource("3_gjkki")
-theme_override_font_sizes/normal_font_size = 24
-text = "Sample"
-
-[node name="Char_2" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_2_Margin/Player_2_Container"]
-custom_minimum_size = Vector2(120, 120)
+[node name="Char_5" parent="GUI/HBoxContainer3/Player_2_Margin/Player_2_Container" instance=ExtResource("1_to7aj")]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-texture = ExtResource("4_qnd60")
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_2_Margin/Player_2_Container/Char_2"]
-custom_minimum_size = Vector2(120, 50)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -60.0
-offset_top = -50.0
-offset_right = 60.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("5_g1af2")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_2_Margin/Player_2_Container/Char_2/NinePatchRect2"]
-custom_minimum_size = Vector2(100, 30)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -50.0
-offset_top = -32.0
-offset_right = 50.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 0
-rotation = -0.0872665
-theme_override_fonts/normal_font = ExtResource("3_gjkki")
-theme_override_font_sizes/normal_font_size = 24
-text = "Sample"
-
-[node name="Char_1" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_2_Margin/Player_2_Container"]
-custom_minimum_size = Vector2(200, 200)
+[node name="Char_6" parent="GUI/HBoxContainer3/Player_2_Margin/Player_2_Container" instance=ExtResource("1_to7aj")]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-texture = ExtResource("4_qnd60")
-
-[node name="Char_1_TextBoxes2" type="VBoxContainer" parent="GUI/HBoxContainer3/Player_2_Margin/Player_2_Container/Char_1"]
-custom_minimum_size = Vector2(200, 100)
-layout_mode = 1
-offset_top = -60.0
-offset_right = 200.0
-offset_bottom = 40.0
-
-[node name="Char_1_Moves" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_2_Margin/Player_2_Container/Char_1/Char_1_TextBoxes2"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("3_gjkki")
-theme_override_font_sizes/normal_font_size = 24
-text = "Moves - "
-fit_content = true
-scroll_active = false
-
-[node name="Char_1_Actions" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_2_Margin/Player_2_Container/Char_1/Char_1_TextBoxes2"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("3_gjkki")
-theme_override_font_sizes/normal_font_size = 24
-text = "Actions - "
-fit_content = true
-scroll_active = false
-
-[node name="NinePatchRect" type="NinePatchRect" parent="GUI/HBoxContainer3/Player_2_Margin/Player_2_Container/Char_1"]
-custom_minimum_size = Vector2(200, 60)
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -60.0
-offset_right = 200.0
-grow_vertical = 0
-texture = ExtResource("5_g1af2")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="GUI/HBoxContainer3/Player_2_Margin/Player_2_Container/Char_1/NinePatchRect"]
-custom_minimum_size = Vector2(120, 30)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -60.0
-offset_top = -40.0
-offset_right = 60.0
-grow_horizontal = 2
-grow_vertical = 0
-rotation = -0.0872665
-theme_override_fonts/normal_font = ExtResource("3_gjkki")
-theme_override_font_sizes/normal_font_size = 30
-text = "Sample"
