@@ -36,7 +36,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35661, 1.5416, 4.73912)
 classPopper = true
 
 [node name="Pusher" parent="." instance=ExtResource("3_jd6sq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.466818, 1.01158, 0.838511)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60702, 1.01158, 1.47807)
 classPusher = true
 
 [node name="Blower2" parent="." instance=ExtResource("3_jd6sq")]

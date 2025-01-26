@@ -27,13 +27,19 @@ func _ready() -> void:
 		characters.append(ch)
 		# give each character a free "move" to snap to the grid
 		ch.moves = 1
-		ch.move(Vector3i(0, 1, 0), gridMap)
+		ch.move(gridMap.global_to_map(ch.global_position), gridMap)
 		#ch.move(gridMap.global_to_map(ch.global_position), gridMap)
 		ch.new_turn(currentTeam)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	var prev_selection := selection
+	
+	var new_chars: Array[Character] = []
+	for ch in characters:
+		if is_instance_valid(ch):
+			new_chars.append(ch)
+	characters = new_chars
 	
 	var has_actions := false
 	for ch in characters:
@@ -115,7 +121,7 @@ func _physics_process(_delta: float) -> void:
 			else:
 				var bubble := result["collider"].get_parent() as Bubble
 				if currentCharacter.classPopper and currentCharacter.grid_dist(bubble.gridPos) <= popRange:
-					bubble.pop()
+					bubble.pop(gridMap)
 					currentCharacter.actions -= 1
 				elif (currentCharacter.classPusher and currentCharacter.grid_dist(bubble.gridPos) <= pushRange):
 					bubble.push(currentCharacter.gridPos, gridMap)

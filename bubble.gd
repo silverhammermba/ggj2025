@@ -9,9 +9,14 @@ func set_spawn(pos: Vector3i, grid: Map) -> void:
 	gridPos = pos
 	global_position = grid.map_to_global(gridPos)
 
-func pop() -> void:
+func pop(grid: Map) -> void:
 	if(hasVictim):
 		victim.bubbleVictim = false
+		var old_moves = victim.moves
+		# hack: move character to current position to make them fall
+		victim.moves = 1
+		victim.move(victim.gridPos, grid)
+		victim.moves = old_moves
 	queue_free()
 	
 func push(from: Vector3i, grid: Map) -> void:
