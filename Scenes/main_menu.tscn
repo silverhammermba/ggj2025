@@ -1,0 +1,234 @@
+[gd_scene load_steps=11 format=3 uid="uid://i8lqw4xtw1v4"]
+
+[ext_resource type="Texture2D" uid="uid://cmva47subm4jr" path="res://Assets/UI/T_RectanglePiece_DarkBlue.svg" id="1_f7vu8"]
+[ext_resource type="Texture2D" uid="uid://blhof8hu3t7v1" path="res://Assets/UI/T_LPiece.svg" id="1_fspwa"]
+[ext_resource type="Script" path="res://Scenes/main_menu.gd" id="1_umnt7"]
+[ext_resource type="FontFile" uid="uid://pgw0h42mqa23" path="res://Assets/Fonts/Audiowide-Regular.ttf" id="2_qnnao"]
+[ext_resource type="Texture2D" uid="uid://bcownngtw8urd" path="res://Assets/UI/T_LPiece_UpsideDown.svg" id="3_w8n2m"]
+[ext_resource type="Texture2D" uid="uid://dyb0f3trk7xcu" path="res://Assets/UI/T_BoxPiece.svg" id="5_x0akf"]
+[ext_resource type="Texture2D" uid="uid://culxrdnqo3klf" path="res://Assets/UI/T_RectanglePiece_Alt_DarkBlue.svg" id="6_b840e"]
+[ext_resource type="Texture2D" uid="uid://dp4jq7xijnvky" path="res://Assets/UI/T_RectanglePiece.svg" id="6_u2l8s"]
+[ext_resource type="Script" path="res://Scenes/menu_button.gd" id="7_bb6ff"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kcd63"]
+bg_color = Color(0.863329, 0.976549, 0.999285, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_umnt7")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kcd63")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(150, 72)
+layout_mode = 2
+offset_left = 140.0
+offset_top = 59.0
+offset_right = 290.0
+offset_bottom = 131.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("1_f7vu8")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 600)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="OptionsButton" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(240, 160)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+focus_neighbor_left = NodePath("../../VBoxContainer2/StartButton")
+focus_neighbor_top = NodePath("../CreditsButton")
+focus_neighbor_right = NodePath("../../VBoxContainer2/StartButton")
+focus_neighbor_bottom = NodePath("../CreditsButton")
+focus_next = NodePath("../CreditsButton")
+focus_previous = NodePath("../../VBoxContainer2/StartButton")
+texture_normal = ExtResource("1_fspwa")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("7_bb6ff")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer/OptionsButton"]
+custom_minimum_size = Vector2(160, 40)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -61.0
+offset_right = 210.0
+offset_bottom = -19.0
+grow_vertical = 0
+theme_override_colors/default_color = Color(0.105882, 0.0784314, 0.392157, 1)
+theme_override_fonts/normal_font = ExtResource("2_qnnao")
+theme_override_font_sizes/normal_font_size = 32
+text = "Options"
+fit_content = true
+autowrap_mode = 0
+
+[node name="CreditsButton" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(240, 160)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+focus_neighbor_left = NodePath("../../VBoxContainer2/StartButton")
+focus_neighbor_top = NodePath("../OptionsButton")
+focus_neighbor_right = NodePath("../../VBoxContainer2/StartButton")
+focus_neighbor_bottom = NodePath("../../VBoxContainer2/MarginContainer/QuitButton")
+focus_next = NodePath("../../VBoxContainer2/MarginContainer/QuitButton")
+focus_previous = NodePath("../OptionsButton")
+texture_normal = ExtResource("3_w8n2m")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("7_bb6ff")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer/CreditsButton"]
+custom_minimum_size = Vector2(160, 40)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -145.0
+offset_right = 210.0
+offset_bottom = -103.0
+grow_vertical = 0
+theme_override_colors/default_color = Color(0.105882, 0.0784314, 0.392157, 1)
+theme_override_fonts/normal_font = ExtResource("2_qnnao")
+theme_override_font_sizes/normal_font_size = 32
+text = "Credits"
+fit_content = true
+autowrap_mode = 0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(240, 240)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+focus_neighbor_left = NodePath("../../VBoxContainer/OptionsButton")
+focus_neighbor_top = NodePath("../MarginContainer/QuitButton")
+focus_neighbor_right = NodePath("../../VBoxContainer/OptionsButton")
+focus_neighbor_bottom = NodePath("../MarginContainer/QuitButton")
+focus_next = NodePath("../../VBoxContainer/OptionsButton")
+focus_previous = NodePath("../MarginContainer/QuitButton")
+texture_normal = ExtResource("5_x0akf")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("7_bb6ff")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer2/StartButton"]
+custom_minimum_size = Vector2(123, 42)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.93
+offset_top = -21.0
+offset_right = 62.07
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.105882, 0.0784314, 0.392157, 1)
+theme_override_fonts/normal_font = ExtResource("2_qnnao")
+theme_override_font_sizes/normal_font_size = 48
+text = "START"
+fit_content = true
+autowrap_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 170
+
+[node name="QuitButton" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer"]
+custom_minimum_size = Vector2(160, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+focus_neighbor_left = NodePath("../../../VBoxContainer/CreditsButton")
+focus_neighbor_top = NodePath("../../StartButton")
+focus_neighbor_right = NodePath("../../../VBoxContainer/CreditsButton")
+focus_neighbor_bottom = NodePath("../../StartButton")
+focus_next = NodePath("../../StartButton")
+focus_previous = NodePath("../../../VBoxContainer/CreditsButton")
+texture_normal = ExtResource("6_u2l8s")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("7_bb6ff")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer/QuitButton"]
+custom_minimum_size = Vector2(123, 42)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.93
+offset_top = -21.0
+offset_right = 62.07
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.105882, 0.0784314, 0.392157, 1)
+theme_override_fonts/normal_font = ExtResource("2_qnnao")
+theme_override_font_sizes/normal_font_size = 48
+text = "Quit"
+fit_content = true
+autowrap_mode = 0
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(402, 200)
+layout_mode = 2
+offset_left = 140.0
+offset_top = 308.35
+offset_right = 542.0
+offset_bottom = 508.35
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("6_b840e")
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="focus_entered" from="MarginContainer/HBoxContainer/VBoxContainer2/StartButton" to="." method="_on_start_button_focus_entered"]
+[connection signal="mouse_entered" from="MarginContainer/HBoxContainer/VBoxContainer2/StartButton" to="." method="_on_start_button_mouse_entered"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer/QuitButton" to="." method="_on_quit_button_pressed"]

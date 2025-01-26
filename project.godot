@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="ggj2025"
-run/main_scene="res://game.tscn"
+run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [dotnet]
 
@@ -24,6 +29,10 @@ project/assembly_name="ggj2025"
 character=""
 ground=""
 bubble=""
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
 
 [input]
 
@@ -75,3 +84,7 @@ end_turn={
 3d_physics/layer_1="ground"
 3d_physics/layer_2="characters"
 3d_physics/layer_3="bubbles"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
