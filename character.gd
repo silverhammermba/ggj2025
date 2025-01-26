@@ -25,6 +25,9 @@ var actions := 0
 var moves := 0
 var timeout := 0
 
+@export var team0Overlay: StandardMaterial3D
+@export var team1Overlay: StandardMaterial3D
+
 func _ready() -> void:
 	model = generalist
 	generalist.visible = false
@@ -36,11 +39,16 @@ func _ready() -> void:
 		model = pusher
 	model.visible = true
 	model.idle()
+	var overlay := team0Overlay
 	match team:
 		0:
 			pass
 		1:
 			model.rotate_y(PI / 2)
+			overlay = team1Overlay
+	var meshes := model.find_children("*", "MeshInstance3D")
+	for mesh in meshes:
+		mesh.material_overlay = overlay
 
 func deselect() -> void:
 	# TODO: if your last action has animation, this cancels it. somehow wait for it to finish
