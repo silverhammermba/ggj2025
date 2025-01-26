@@ -30,6 +30,7 @@ func _ready() -> void:
 	elif classPusher:
 		model = pusher
 	model.visible = true
+	model.idle()
 	match team:
 		0:
 			pass
@@ -38,7 +39,7 @@ func _ready() -> void:
 
 func deselect() -> void:
 	# TODO: if your last action has animation, this cancels it. somehow wait for it to finish
-	model.stop()
+	model.idle()
 
 func select() -> void:
 	model.walk()
