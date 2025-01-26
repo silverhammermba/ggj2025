@@ -5,6 +5,10 @@ class_name Character extends Node3D
 var gridPos: Vector3i = Vector3.ZERO
 var bubbleVictim = false
 
+@export var classBlower := false
+@export var classPopper := false
+@export var classPusher := false
+
 @export var team := 0
 @export var max_actions := 1
 @export var max_moves := 3
