@@ -213,5 +213,5 @@ func update_ui() -> void:
 	var charUIs: Array[CharacterUI] = [p1UI,p2UI,p3UI,p4UI,p5UI,p6UI]
 	for idx in range(0, characters.size()):
 		var ch := characters[idx]
-		charUIs[idx].updateUI(ch,idx == selection)
+		charUIs[idx].updateUI(ch, idx == selection, currentTeam)
 		

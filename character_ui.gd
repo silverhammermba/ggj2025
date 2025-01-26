@@ -13,12 +13,25 @@ func _ready():
 	pass # Replace with function body.
 
 
-func updateUI(character: Character, cur: bool):
-	movesText.text = "%d"%character.moves
-	actionsText.text = "%d"%character.actions
+func updateUI(character: Character, isSelected: bool, currentTeam: int):
+	var moves := "MOVES %d" % character.moves
+	var actions := "ACTIONS %d" % character.actions
+	
+	if character.timeout > 0:
+		moves = ""
+		actions = "RESPAWN (%d)" % character.timeout
+	elif character.bubbleVictim:
+		moves = ""
+		actions = "BUBBLED!"
+	elif character.team != currentTeam:
+		moves = ""
+		actions = ""
+	
+	movesText.text = moves
+	actionsText.text = actions
 	nameText.text = character.name()
 	
-	scale = Vector2(1.0,1.0) if cur else Vector2(0.8,0.8)
+	scale = Vector2(1.0,1.0) if isSelected else Vector2(0.8,0.8)
 	
 	if character.team == 1:
 		texture = newTex
