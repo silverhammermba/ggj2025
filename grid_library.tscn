@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://55jdfldyeor5"]
+[gd_scene load_steps=9 format=3 uid="uid://55jdfldyeor5"]
 
 [ext_resource type="Texture2D" uid="uid://3ds20oidcalk" path="res://Assets/UI/T_SquareTile_Alt.svg" id="1_y5216"]
+[ext_resource type="PackedScene" uid="uid://dyw563som18mg" path="res://Assets/WhiteTile.glb" id="2_enykm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oxkkw"]
 albedo_color = Color(0.2139, 0.268357, 0.31, 1)
@@ -41,6 +42,14 @@ mesh = SubResource("BoxMesh_kgu3m")
 [node name="StaticBody3D2" type="StaticBody3D" parent="Square"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Square/StaticBody3D2"]
+shape = SubResource("ConvexPolygonShape3D_7xesy")
+
+[node name="WhiteTile" parent="." groups=["ground"] instance=ExtResource("2_enykm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="WhiteTile"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WhiteTile/StaticBody3D2"]
 shape = SubResource("ConvexPolygonShape3D_7xesy")
 
 [node name="Slope" type="MeshInstance3D" parent="." groups=["ground"]]
