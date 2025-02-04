@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cue3tmnk3035c"
+path="res://.godot/imported/OtherSelect SFX1.mp3-786d3ec778d5725d7b37b14f1df15605.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/OtherSelect SFX1.mp3"
+dest_files=["res://.godot/imported/OtherSelect SFX1.mp3-786d3ec778d5725d7b37b14f1df15605.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

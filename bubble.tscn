@@ -1,6 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://q7t0uad308xi"]
+[gd_scene load_steps=15 format=3 uid="uid://q7t0uad308xi"]
 
 [ext_resource type="Script" path="res://bubble.gd" id="1_ifuwr"]
+[ext_resource type="AudioStream" uid="uid://ds3gxay8fimp6" path="res://Assets/Audio/SFX/BUBBLEDSFX1.mp3" id="2_pua7h"]
+[ext_resource type="AudioStream" uid="uid://lo230eddns6g" path="res://Assets/Audio/SFX/PopSFX4.mp3" id="3_0nw4h"]
+[ext_resource type="AudioStream" uid="uid://cff7lrtvbe4oe" path="res://Assets/Audio/SFX/BalloonPushSFX1.mp3" id="3_2h3a2"]
+[ext_resource type="AudioStream" uid="uid://bynpmia3eskma" path="res://Assets/Audio/SFX/BalloonPushSFX2.mp3" id="5_8gcc6"]
+[ext_resource type="AudioStream" uid="uid://c0xb32m0sa3lf" path="res://Assets/Audio/SFX/BalloonInflateSFX1.mp3" id="6_uyon5"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pxtxc"]
+random_pitch = 1.6
+streams_count = 2
+stream_0/stream = ExtResource("3_2h3a2")
+stream_1/stream = ExtResource("5_8gcc6")
 
 [sub_resource type="SphereMesh" id="SphereMesh_1iobu"]
 
@@ -51,6 +62,20 @@ _data = {
 
 [node name="Bubble" type="Node3D" groups=["bubble"]]
 script = ExtResource("1_ifuwr")
+
+[node name="BubbledSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_pua7h")
+
+[node name="BubblePopSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_0nw4h")
+volume_db = 14.628
+pitch_scale = 1.45
+
+[node name="BubblePushSFX" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_pxtxc")
+
+[node name="BubbleBlowSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_uyon5")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_1iobu")

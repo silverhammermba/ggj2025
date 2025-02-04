@@ -50,6 +50,7 @@ func _process(_delta: float) -> void:
 			has_actions = true
 			break
 	if !has_actions or Input.is_action_just_pressed("end_turn"):
+		$FinalizeTurnSFX.play()
 		new_turn()
 		# check again if new team has actions
 		has_actions = false
@@ -63,6 +64,7 @@ func _process(_delta: float) -> void:
 		return
 	
 	if Input.is_action_just_pressed("prev char"):
+		$MenuHoverSFX.play()
 		while true:
 			if selection >= 0:
 				selection -= 1
@@ -73,6 +75,7 @@ func _process(_delta: float) -> void:
 			if characters[selection].has_actions(currentTeam):
 				break
 	elif Input.is_action_just_pressed("next char") or selection < 0 or !characters[selection].has_actions(currentTeam):
+		$MenuHoverSFX.play()
 		while true:
 			selection = (selection + 1) % characters.size()
 			if characters[selection].has_actions(currentTeam):
@@ -86,15 +89,23 @@ func _process(_delta: float) -> void:
 	if selection >= 0:
 		if Input.is_action_just_pressed("move_down"):
 			var currentCharacter = characters[selection]
+			if currentCharacter.moves > 0:
+				$MovementSFX.play()
 			currentCharacter.move(currentCharacter.gridPos + Vector3i.BACK, gridMap, characters)
 		if Input.is_action_just_pressed("move_up"):
 			var currentCharacter = characters[selection]
+			if currentCharacter.moves > 0:
+				$MovementSFX.play()
 			currentCharacter.move(currentCharacter.gridPos + Vector3i.FORWARD, gridMap, characters)
 		if Input.is_action_just_pressed("move_left"):
 			var currentCharacter = characters[selection]
+			if currentCharacter.moves > 0:
+				$MovementSFX.play()
 			currentCharacter.move(currentCharacter.gridPos + Vector3i.LEFT, gridMap, characters)
 		if Input.is_action_just_pressed("move_right"):
 			var currentCharacter = characters[selection]
+			if currentCharacter.moves > 0:
+				$MovementSFX.play()
 			currentCharacter.move(currentCharacter.gridPos + Vector3i.RIGHT, gridMap, characters)
 	update_ui()
 
@@ -115,7 +126,7 @@ func _physics_process(_delta: float) -> void:
 		var bubbleQuery := PhysicsRayQueryParameters3D.create(rayOrigin, rayEnd, 4)
 		var bubbleResult := space_state.intersect_ray(bubbleQuery)
 		
-		if currentCharacter.classBlower:
+		if currentCharacter.classBlower or currentCharacter.classEnemyBlower:
 			if "position" not in groundResult:
 				return
 			var clickedPosition: Vector3 = groundResult["position"]
@@ -125,7 +136,7 @@ func _physics_process(_delta: float) -> void:
 				if spawn_bubble(clickedGridPosition):
 					currentCharacter.actions -= 1
 					currentCharacter.model.blow()
-		elif currentCharacter.classPopper:
+		elif currentCharacter.classPopper or currentCharacter.classEnemyPopper:
 			if "position" not in bubbleResult:
 				return
 			var bubble := bubbleResult["collider"].get_parent() as Bubble
@@ -133,7 +144,7 @@ func _physics_process(_delta: float) -> void:
 				bubble.pop(gridMap)
 				currentCharacter.actions -= 1
 				currentCharacter.model.pop()
-		elif currentCharacter.classPusher:
+		elif currentCharacter.classPusher or currentCharacter.classEnemyPusher:
 			if "position" in bubbleResult:
 				var bubble := bubbleResult["collider"].get_parent() as Bubble
 				if currentCharacter.grid_dist(bubble.gridPos) <= pushRange:

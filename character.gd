@@ -4,17 +4,27 @@ class_name Character extends Node3D
 @onready var blower: CharacterModel = $CharacterBody3D/Blower
 @onready var popper: CharacterModel = $CharacterBody3D/Popper
 @onready var pusher: CharacterModel = $CharacterBody3D/Pusher
+@onready var enemy_blower: CharacterModel = $CharacterBody3D/FrogBlower
+@onready var enemy_popper: CharacterModel = $CharacterBody3D/StarnosePopper
+@onready var enemy_pusher: CharacterModel = $CharacterBody3D/DungBeetlePusher
 var model: CharacterModel
 var gridPos := Vector3i.ZERO
 var bubbleVictim = false
 
+@export var GeneralistImg : Texture2D
 @export var PopperImg : Texture2D
 @export var PusherImg : Texture2D
 @export var BlowerImg : Texture2D
+@export var EnemyPopperImg : Texture2D
+@export var EnemyPusherImg : Texture2D
+@export var EnemyBlowerImg : Texture2D
 
 @export var classBlower := false
 @export var classPopper := false
 @export var classPusher := false
+@export var classEnemyBlower := false
+@export var classEnemyPopper := false
+@export var classEnemyPusher := false
 
 @export var team := 0
 @export var max_actions := 1
@@ -37,6 +47,12 @@ func _ready() -> void:
 		model = popper
 	elif classPusher:
 		model = pusher
+	elif classEnemyBlower:
+		model = enemy_blower
+	elif classEnemyPopper:
+		model = enemy_popper
+	elif classEnemyPusher:
+		model = enemy_pusher
 	model.visible = true
 	model.idle()
 	var overlay := team0Overlay
@@ -79,11 +95,13 @@ func has_actions(currentTeam: int) -> bool:
 	return actions > 0 or moves > 0
 
 func name() -> String:
-	var klass := "Blower"
-	if classPopper:
+	var klass := "Generalist"
+	if classPopper or classEnemyPopper:
 		klass = "Popper"
-	elif classPusher:
+	elif classPusher or classEnemyPusher:
 		klass = "Pusher"
+	elif classBlower or classEnemyBlower:
+		klass = "Blower"
 	return klass
 
 func picture() -> Texture2D:
@@ -91,7 +109,15 @@ func picture() -> Texture2D:
 		return PopperImg
 	elif classPusher:
 		return PusherImg
-	return BlowerImg
+	elif classBlower:
+		return BlowerImg
+	elif classEnemyPopper:
+		return EnemyPopperImg
+	elif classEnemyPusher:
+		return EnemyPusherImg
+	elif classEnemyBlower:
+		return EnemyBlowerImg
+	return GeneralistImg
 	
 func status() -> String:
 	var klass := "Blower"
