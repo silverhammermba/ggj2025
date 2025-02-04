@@ -19,6 +19,8 @@ var bubbleVictim = false
 @export var EnemyPusherImg : Texture2D
 @export var EnemyBlowerImg : Texture2D
 
+@export var classGeneralist := false
+@export var generalist_selector := 0;
 @export var classBlower := false
 @export var classPopper := false
 @export var classPusher := false
@@ -30,6 +32,7 @@ var bubbleVictim = false
 @export var max_actions := 1
 @export var max_moves := 3
 @export var max_timeout := 3
+
 @export var fallPos := Vector3i(-50, 0, -50)
 var actions := 0
 var moves := 0

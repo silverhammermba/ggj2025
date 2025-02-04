@@ -160,6 +160,43 @@ func _physics_process(_delta: float) -> void:
 						if ch.push(currentCharacter.gridPos, gridMap, characters):
 							currentCharacter.actions -= 1
 							currentCharacter.model.push()
+		elif currentCharacter.generalist:
+			#Generalist with selector for skills
+			if currentCharacter.generalist_selector == 0:
+				if "position" not in groundResult:
+					return
+				var clickedPosition: Vector3 = groundResult["position"]
+				var clickedNormal: Vector3 = groundResult["normal"]
+				var clickedGridPosition := gridMap.global_to_open(clickedPosition + clickedNormal * 0.1)
+				if currentCharacter.grid_dist(clickedGridPosition) <= bubbleRange:
+					if spawn_bubble(clickedGridPosition):
+						currentCharacter.actions -= 1
+						currentCharacter.model.blow()
+			elif currentCharacter.generalist_selector == 1:
+				if "position" not in bubbleResult:
+					return
+				var bubble := bubbleResult["collider"].get_parent() as Bubble
+				if currentCharacter.grid_dist(bubble.gridPos) <= popRange:
+					bubble.pop(gridMap)
+					currentCharacter.actions -= 1
+					currentCharacter.model.pop()
+			elif currentCharacter.generalist_selector == 2:
+				if "position" in bubbleResult:
+					var bubble := bubbleResult["collider"].get_parent() as Bubble
+					if currentCharacter.grid_dist(bubble.gridPos) <= pushRange:
+						bubble.push(currentCharacter.gridPos, gridMap, bubbles)
+						currentCharacter.actions -= 1
+						currentCharacter.model.push()
+				elif "position" in groundResult:
+					var clickedPosition: Vector3 = groundResult["position"]
+					var clickedNormal: Vector3 = groundResult["normal"]
+					var clickedGridPosition := gridMap.global_to_open(clickedPosition + clickedNormal * 0.1)
+					for ch in characters:
+						if ch != self and ch.gridPos == clickedGridPosition:
+							if ch.push(currentCharacter.gridPos, gridMap, characters):
+								currentCharacter.actions -= 1
+								currentCharacter.model.push()
+			
 
 func spawn_bubble(pos: Vector3i) -> bool:
 	for ch in characters:

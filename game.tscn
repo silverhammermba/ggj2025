@@ -100,10 +100,14 @@ classBlower = true
 
 [node name="Popper" parent="." instance=ExtResource("3_jd6sq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35661, 1.0416, 4.73912)
+GeneralistImg = ExtResource("6_8ib4r")
+generalist_selector = 1
 classPopper = true
 
 [node name="Pusher" parent="." instance=ExtResource("3_jd6sq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60702, 1.01158, 1.47807)
+GeneralistImg = ExtResource("6_8ib4r")
+generalist_selector = 2
 classPusher = true
 
 [node name="Blower2" parent="." instance=ExtResource("3_jd6sq")]
