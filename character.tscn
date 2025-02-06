@@ -1,25 +1,24 @@
-[gd_scene load_steps=19 format=3 uid="uid://dgc7cu5viowl"]
+[gd_scene load_steps=24 format=3 uid="uid://dgc7cu5viowl"]
 
 [ext_resource type="Script" path="res://character.gd" id="1_kes5e"]
 [ext_resource type="Texture2D" uid="uid://cl3ad3pek08x3" path="res://Assets/UI/Poker.png" id="2_6qn54"]
 [ext_resource type="PackedScene" uid="uid://v24so1xiv2je" path="res://generalist.tscn" id="2_ofvwj"]
+[ext_resource type="Texture2D" uid="uid://ct4cggt4jt6dh" path="res://Assets/UI/Generalist.png" id="2_y5mil"]
 [ext_resource type="Texture2D" uid="uid://btv0q78gptd7r" path="res://Assets/UI/Pusher.png" id="3_17v3a"]
-[ext_resource type="PackedScene" uid="uid://dj13m5ehxckna" path="res://blower.tscn" id="3_u4sli"]
+[ext_resource type="PackedScene" path="res://blower.tscn" id="3_u4sli"]
 [ext_resource type="Texture2D" uid="uid://blv2uo580cbsu" path="res://Assets/UI/Blower.png" id="4_10pp6"]
-[ext_resource type="PackedScene" uid="uid://dmk00ydps135k" path="res://popper.tscn" id="4_yy85d"]
-[ext_resource type="PackedScene" uid="uid://bkabxp1q85qp2" path="res://pusher.tscn" id="5_1oc7x"]
+[ext_resource type="PackedScene" path="res://popper.tscn" id="4_yy85d"]
+[ext_resource type="PackedScene" path="res://pusher.tscn" id="5_1oc7x"]
+[ext_resource type="Texture2D" uid="uid://b84j52llpg5yp" path="res://Assets/UI/StarnosePopper.png" id="6_kx7u5"]
+[ext_resource type="Texture2D" uid="uid://pkw6kym16xu3" path="res://Assets/UI/DungBeetlePusher.png" id="7_ch1ct"]
+[ext_resource type="Texture2D" uid="uid://cgo1k6fm680mv" path="res://Assets/UI/FrogBlower.png" id="8_qy0ei"]
 [ext_resource type="PackedScene" uid="uid://dqflquiqaou7y" path="res://Assets/DungBeetlePusher.glb" id="9_d6wnr"]
+[ext_resource type="Material" uid="uid://dlqtgipml4qnc" path="res://Assets/Materials/p1_outline.material" id="9_fldfi"]
+[ext_resource type="Material" uid="uid://jg1eirli2wdb" path="res://Assets/Materials/p2_outline.material" id="10_m0b8l"]
 [ext_resource type="Script" path="res://character_model.gd" id="10_vu2yy"]
 [ext_resource type="PackedScene" uid="uid://bfmbwr0khrmq" path="res://Assets/FrogBlower.glb" id="11_cewhe"]
+[ext_resource type="Material" uid="uid://ba01xxs36474j" path="res://Assets/Materials/inactive_outline.material" id="11_x1b8o"]
 [ext_resource type="PackedScene" uid="uid://ots8g3hxkjg7" path="res://Assets/StarnosePopper.glb" id="12_djp6e"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dqlwy"]
-transparency = 1
-albedo_color = Color(0, 0.380392, 1, 0.313726)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rihgc"]
-transparency = 1
-albedo_color = Color(1, 0.317647, 0.721569, 0.301961)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lnxdv"]
 
@@ -62,11 +61,16 @@ _data = {
 
 [node name="Character" type="Node3D" groups=["character"]]
 script = ExtResource("1_kes5e")
+GeneralistImg = ExtResource("2_y5mil")
 PopperImg = ExtResource("2_6qn54")
 PusherImg = ExtResource("3_17v3a")
 BlowerImg = ExtResource("4_10pp6")
-team0Overlay = SubResource("StandardMaterial3D_dqlwy")
-team1Overlay = SubResource("StandardMaterial3D_rihgc")
+EnemyPopperImg = ExtResource("6_kx7u5")
+EnemyPusherImg = ExtResource("7_ch1ct")
+EnemyBlowerImg = ExtResource("8_qy0ei")
+team0Overlay = ExtResource("9_fldfi")
+team1Overlay = ExtResource("10_m0b8l")
+inactiveOverlay = ExtResource("11_x1b8o")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 collision_layer = 2

@@ -40,6 +40,7 @@ var timeout := 0
 
 @export var team0Overlay: StandardMaterial3D
 @export var team1Overlay: StandardMaterial3D
+@export var inactiveOverlay: StandardMaterial3D
 
 func _ready() -> void:
 	model = generalist

@@ -101,7 +101,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="OptionsButton" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="OptionsButton" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer" node_paths=PackedStringArray("hover_sound")]
 custom_minimum_size = Vector2(240, 160)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -116,6 +116,7 @@ texture_normal = ExtResource("1_fspwa")
 ignore_texture_size = true
 stretch_mode = 4
 script = ExtResource("7_bb6ff")
+hover_sound = NodePath("../../../../MenuHoverSFX")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer/OptionsButton"]
 custom_minimum_size = Vector2(160, 40)
@@ -135,7 +136,7 @@ text = "Options"
 fit_content = true
 autowrap_mode = 0
 
-[node name="CreditsButton" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="CreditsButton" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer" node_paths=PackedStringArray("hover_sound")]
 custom_minimum_size = Vector2(240, 160)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -150,6 +151,7 @@ texture_normal = ExtResource("3_w8n2m")
 ignore_texture_size = true
 stretch_mode = 4
 script = ExtResource("7_bb6ff")
+hover_sound = NodePath("../../../../MenuHoverSFX")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer/CreditsButton"]
 custom_minimum_size = Vector2(160, 40)
@@ -172,7 +174,7 @@ autowrap_mode = 0
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="StartButton" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="StartButton" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer2" node_paths=PackedStringArray("hover_sound")]
 custom_minimum_size = Vector2(240, 240)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -187,6 +189,7 @@ texture_normal = ExtResource("5_x0akf")
 ignore_texture_size = true
 stretch_mode = 4
 script = ExtResource("7_bb6ff")
+hover_sound = NodePath("../../../../MenuHoverSFX")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer2/StartButton"]
 custom_minimum_size = Vector2(123, 42)
@@ -216,7 +219,7 @@ size_flags_vertical = 0
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 170
 
-[node name="QuitButton" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer"]
+[node name="QuitButton" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer" node_paths=PackedStringArray("hover_sound")]
 custom_minimum_size = Vector2(160, 80)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -231,6 +234,7 @@ texture_normal = ExtResource("6_u2l8s")
 ignore_texture_size = true
 stretch_mode = 4
 script = ExtResource("7_bb6ff")
+hover_sound = NodePath("../../../../../MenuHoverSFX")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer/QuitButton"]
 custom_minimum_size = Vector2(123, 42)
