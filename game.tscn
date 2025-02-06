@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bg3jpfe55aita"]
+[gd_scene load_steps=21 format=3 uid="uid://bg3jpfe55aita"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_demmu"]
 [ext_resource type="PackedScene" uid="uid://q7t0uad308xi" path="res://bubble.tscn" id="2_4fehy"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://daypnlsfnja44" path="res://Scenes/game_ui.tscn" id="6_iy754"]
 [ext_resource type="Texture2D" uid="uid://cq2byr5y4toxv" path="res://Assets/UI/T_VaporGrid.svg" id="6_tsie4"]
 [ext_resource type="Script" path="res://camera_rotate.gd" id="9_3k2k8"]
+[ext_resource type="PackedScene" uid="uid://bodxs12au5nve" path="res://Scenes/options_menu.tscn" id="13_i06le"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_8f3rb"]
 panorama = ExtResource("3_55trq")
@@ -121,3 +122,9 @@ team = 1
 transform = Transform3D(13.215, 0, 0, 0, 13.215, 0, 0, 0, 13.215, 3.485, 0, 3.5)
 mesh = SubResource("PlaneMesh_s5pne")
 surface_material_override/0 = SubResource("StandardMaterial3D_bvp0e")
+
+[node name="OptionsLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="OptionsMenu" parent="OptionsLayer" instance=ExtResource("13_i06le")]
+visible = false

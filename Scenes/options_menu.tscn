@@ -1,0 +1,152 @@
+[gd_scene load_steps=5 format=3 uid="uid://bodxs12au5nve"]
+
+[ext_resource type="Texture2D" uid="uid://dp4jq7xijnvky" path="res://Assets/UI/T_RectanglePiece.svg" id="1_t22dt"]
+[ext_resource type="Script" path="res://Scenes/menu_button.gd" id="2_w5k87"]
+[ext_resource type="FontFile" uid="uid://pgw0h42mqa23" path="res://Assets/Fonts/Audiowide-Regular.ttf" id="3_ybgl5"]
+[ext_resource type="AudioStream" uid="uid://bwqrlei0gkn7x" path="res://Assets/Audio/OtherSelect SFX1.mp3" id="4_6gccp"]
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -400.0
+offset_right = 200.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ContinueMarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ContinueButton" type="TextureButton" parent="MarginContainer/VBoxContainer/ContinueMarginContainer" node_paths=PackedStringArray("hover_sound")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../../QuitMarginContainer/QuitButton")
+focus_neighbor_top = NodePath("../../QuitMarginContainer/QuitButton")
+focus_neighbor_right = NodePath("../../RestartMarginContainer/RestartButton")
+focus_neighbor_bottom = NodePath("../../RestartMarginContainer/RestartButton")
+focus_next = NodePath("../../RestartMarginContainer/RestartButton")
+focus_previous = NodePath("../../QuitMarginContainer/QuitButton")
+texture_normal = ExtResource("1_t22dt")
+script = ExtResource("2_w5k87")
+hover_sound = NodePath("../../../../AudioStreamPlayer2D")
+
+[node name="ContinueText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/ContinueMarginContainer/ContinueButton"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.5
+offset_top = -24.5
+offset_right = 106.5
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("3_ybgl5")
+theme_override_font_sizes/normal_font_size = 36
+text = "Continue"
+fit_content = true
+
+[node name="RestartMarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="RestartButton" type="TextureButton" parent="MarginContainer/VBoxContainer/RestartMarginContainer" node_paths=PackedStringArray("hover_sound")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../../ContinueMarginContainer/ContinueButton")
+focus_neighbor_top = NodePath("../../ContinueMarginContainer/ContinueButton")
+focus_neighbor_right = NodePath("../../QuitMarginContainer/QuitButton")
+focus_neighbor_bottom = NodePath("../../QuitMarginContainer/QuitButton")
+focus_next = NodePath("../../QuitMarginContainer/QuitButton")
+focus_previous = NodePath("../../ContinueMarginContainer/ContinueButton")
+texture_normal = ExtResource("1_t22dt")
+script = ExtResource("2_w5k87")
+hover_sound = NodePath("../../../../AudioStreamPlayer2D")
+
+[node name="RestartText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/RestartMarginContainer/RestartButton"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.5
+offset_top = -20.5
+offset_right = 118.5
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("3_ybgl5")
+theme_override_font_sizes/normal_font_size = 36
+text = "Restart"
+fit_content = true
+
+[node name="QuitMarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="QuitButton" type="TextureButton" parent="MarginContainer/VBoxContainer/QuitMarginContainer" node_paths=PackedStringArray("hover_sound")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../../RestartMarginContainer/RestartButton")
+focus_neighbor_top = NodePath("../../RestartMarginContainer/RestartButton")
+focus_neighbor_right = NodePath("../../ContinueMarginContainer/ContinueButton")
+focus_neighbor_bottom = NodePath("../../ContinueMarginContainer/ContinueButton")
+focus_next = NodePath("../../ContinueMarginContainer/ContinueButton")
+focus_previous = NodePath("../../RestartMarginContainer/RestartButton")
+texture_normal = ExtResource("1_t22dt")
+script = ExtResource("2_w5k87")
+hover_sound = NodePath("../../../../AudioStreamPlayer2D")
+
+[node name="QuitText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/QuitMarginContainer/QuitButton"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.5
+offset_top = -26.5
+offset_right = 150.5
+offset_bottom = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("3_ybgl5")
+theme_override_font_sizes/normal_font_size = 36
+text = "Quit"
+fit_content = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_6gccp")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ContinueMarginContainer/ContinueButton" to="MarginContainer/VBoxContainer/ContinueMarginContainer/ContinueButton" method="_on_continue_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/RestartMarginContainer/RestartButton" to="MarginContainer/VBoxContainer/ContinueMarginContainer/ContinueButton" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitMarginContainer/QuitButton" to="MarginContainer/VBoxContainer/ContinueMarginContainer/ContinueButton" method="_on_quit_button_pressed"]

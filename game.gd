@@ -1,5 +1,7 @@
 class_name Game extends Node3D
 
+var myNewScene = preload("res://game.tscn")
+
 @onready var gridMap: Map = $map
 @onready var camera: Camera3D = $"camera pivot/Camera3D"
 
@@ -12,6 +14,12 @@ class_name Game extends Node3D
 
 @onready var p1Arrow: NinePatchRect = $GameUI/GUI/HBoxContainer3/Arrow_Margin/HBoxContainer/Player_1_Arrow
 @onready var p2Arrow: NinePatchRect = $GameUI/GUI/HBoxContainer3/Arrow_Margin/HBoxContainer/Player_2_Arrow
+
+@onready var optionsMenu: Control = $OptionsLayer/OptionsMenu
+@onready var continueButton: TextureButton = $OptionsLayer/OptionsMenu/MarginContainer/VBoxContainer/ContinueMarginContainer/ContinueButton
+@onready var restartButton: TextureButton = $OptionsLayer/OptionsMenu/MarginContainer/VBoxContainer/RestartMarginContainer/RestartButton
+@onready var quitButton: TextureButton = $OptionsLayer/OptionsMenu/MarginContainer/VBoxContainer/QuitMarginContainer/QuitButton
+
 
 @export var RAY_CAST_LENGTH := 1000
 @export var bubbleScene : PackedScene
@@ -28,6 +36,7 @@ var rayOrigin := Vector3.ZERO
 var rayEnd := Vector3.ZERO
 var currentTeam := 0
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var chars = get_tree().get_nodes_in_group("character")
@@ -41,7 +50,12 @@ func _ready() -> void:
 		ch.new_turn(currentTeam)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _process(_delta: float) -> void:	
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+
+	if Input.is_action_just_pressed("reset"):
+		get_tree().reload_current_scene()
 	var prev_selection := selection
 	
 	var has_actions := false
@@ -249,7 +263,7 @@ func _input(event: InputEvent) -> void:
 		rayOrigin = from
 		rayEnd = from + normal * RAY_CAST_LENGTH
 		newRayCast = true
-		
+			
 func update_ui() -> void:
 	if currentTeam != 0:
 		p1Arrow.modulate = Color(0,0,0,0)
@@ -262,4 +276,29 @@ func update_ui() -> void:
 	for idx in range(0, characters.size()):
 		var ch := characters[idx]
 		charUIs[idx].updateUI(ch, idx == selection, currentTeam)
-		
+	
+	if Input.is_action_just_released("ui_cancel") and optionsMenu.visible != true:
+		optionsMenu.visible = true
+		#get_tree().paused = true
+		print("open")
+	elif Input.is_action_just_released("ui_cancel") and optionsMenu.visible != false:
+		optionsMenu.visible = false
+		#get_tree().paused = false
+		print("closed")
+
+func pause_game():
+	optionsMenu.visible = true
+	get_tree().paused
+	#if continueButton.pressed:
+		#close_menu()
+	#if restartButton.pressed:
+		#pass
+	#if quitButton.pressed:
+		#pass	
+		#
+#func open_menu() -> void:
+	#optionsMenu.visible = true
+	#
+#func close_menu() -> void:
+	#optionsMenu.visible = false
+	

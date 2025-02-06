@@ -11,7 +11,10 @@ var is_focused = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	connect_signals() # Replace with function body.
+	if self.disabled:
+		self.modulate = Color(.5,.5,.5,1)
+	else:
+		connect_signals() # Replace with function body.
 
 func connect_signals() -> void:
 	self.mouse_entered.connect(on_hover)
@@ -37,8 +40,22 @@ func on_focus() -> void:
 func on_focus_end() -> void:
 	self.modulate = Color(1,1,1,1)
 
-func sprite_flash() -> void:
-	var tween: Tween = create_tween()
-	tween.tween_property(self, "self_modulate:v", 1, 0.15).from(5)
-	
-	
+
+func _on_continue_button_pressed():
+	get_node("OptionsMenu").visible = false
+	#get_tree().paused = not get_tree().paused
+	#get_viewport().set_input_as_handled() # Replace with function body.
+
+
+func _on_restart_button_pressed():
+	print("imtrying")
+	var newScene = preload("res://game.tscn")
+	queue_free()
+	var loadNewScene = newScene.instance()
+	add_child(loadNewScene) # Replace with function body.
+
+
+func _on_quit_button_pressed():
+	print("quit")
+	get_tree().paused = false # <- Here
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
