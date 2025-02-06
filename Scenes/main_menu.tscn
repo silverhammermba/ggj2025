@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://i8lqw4xtw1v4"]
+[gd_scene load_steps=21 format=3 uid="uid://i8lqw4xtw1v4"]
 
 [ext_resource type="Texture2D" uid="uid://cmva47subm4jr" path="res://Assets/UI/T_RectanglePiece_DarkBlue.svg" id="1_f7vu8"]
 [ext_resource type="Texture2D" uid="uid://blhof8hu3t7v1" path="res://Assets/UI/T_LPiece.svg" id="1_fspwa"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://culxrdnqo3klf" path="res://Assets/UI/T_RectanglePiece_Alt_DarkBlue.svg" id="6_b840e"]
 [ext_resource type="Texture2D" uid="uid://dp4jq7xijnvky" path="res://Assets/UI/T_RectanglePiece.svg" id="6_u2l8s"]
 [ext_resource type="Script" path="res://Scenes/menu_button.gd" id="7_bb6ff"]
+[ext_resource type="Texture2D" uid="uid://d23vk6fyho0ka" path="res://Assets/UI/Pop_Logo.png" id="14_idpt5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kcd63"]
 bg_color = Color(0.863329, 0.976549, 0.999285, 1)
@@ -23,6 +24,44 @@ texture = ExtResource("2_h487e")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w1wg5"]
 texture = ExtResource("1_f7vu8")
 modulate_color = Color(1, 1, 1, 0.705882)
+
+[sub_resource type="Animation" id="Animation_7m5vx"]
+resource_name = "pulse"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.75, 1.75), Vector2(1.85, 1.85)]
+}
+
+[sub_resource type="Animation" id="Animation_d4uqb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.75, 1.75)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p7gdj"]
+_data = {
+"RESET": SubResource("Animation_d4uqb"),
+"pulse": SubResource("Animation_7m5vx")
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -318,6 +357,29 @@ scale = Vector2(1.5, 1.5)
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("6_b840e")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -826.0
+offset_top = -266.0
+offset_right = -326.0
+offset_bottom = 234.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(1.75, 1.75)
+pivot_offset = Vector2(250, 250)
+texture = ExtResource("14_idpt5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect"]
+libraries = {
+"": SubResource("AnimationLibrary_p7gdj")
+}
+autoplay = "pulse"
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
